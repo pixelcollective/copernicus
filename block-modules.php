@@ -54,11 +54,10 @@
         // setup container
         $app = \Roots\Acorn\Application::getInstance();
 
-        // add configuration
-        \Roots\config(['blocks' => require $this->plugin->config]);
-
         // setup providers
-        if ($providers = $app['config']->get('blocks.providers') ?? null) {
+        if ($providers = collect(require $this->plugin->config)->get(
+            'providers'
+        ) ?? null) {
             array_map([$app, 'register'], $providers);
         }
     }

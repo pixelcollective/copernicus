@@ -16,6 +16,7 @@ class Block
 
     public function register($blockName)
     {
+        $this->blockName = $blockName;
         $this->blockType = "{$this->namespace}/{$blockName}";
 
         add_action('enqueue_block_editor_assets', function () {
@@ -71,7 +72,7 @@ class Block
 
         if (file_exists($style->path)
             && has_block($this->blockType)) {
-                wp_enqueue_style(
+            wp_enqueue_style(
                     "{$this->blockType}/public/css",
                     $style->url,
                     false,
@@ -86,7 +87,7 @@ class Block
 
         if (file_exists($script->path)
             && has_block($this->blockType)) {
-                wp_enqueue_script(
+            wp_enqueue_script(
                     "{$this->blockType}/public/js",
                     $script->url,
                     null,
@@ -102,7 +103,7 @@ class Block
 
         if (file_exists($react->path)
             && has_block($this->blockType)) {
-                wp_enqueue_script(
+            wp_enqueue_script(
                     "{$this->blockType}/public/react",
                     $react->url,
                     ['wp-element'],
@@ -114,12 +115,13 @@ class Block
 
     public function registerBlock()
     {
-        register_block_type($this->blockType, ['render_callback' =>
-            function ($attributes, $content) {
-                return $this->app['view']->make("{$this->blockType}.render")->with(
-                    $this->data($attributes, $content)
+        register_block_type($this->blockType, [
+            'render_callback' => function ($attributes, $content) {
+                return $this->app['view']->make(
+                    "blocks::{$this->blockType}.render",
+                    $this->data($attributes, $content),
                 );
-            },
+            }
         ]);
     }
 
