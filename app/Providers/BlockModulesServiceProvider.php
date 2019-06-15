@@ -32,12 +32,6 @@ class BlockModulesServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($configPath, 'blocks');
 
         /**
-         * Adds views to Acorn
-         */
-        $views = $this->app['config']->get('blocks.views');
-        $this->loadViewsFrom($views, 'blocks');
-
-        /**
          * Registers view composers
          */
         foreach ($this->app->config['blocks.composers'] as $composer) {
@@ -56,6 +50,20 @@ class BlockModulesServiceProvider extends ServiceProvider
             }
             $blade->directive($name, $handler);
         }
+
+        /**
+         * Registers view finder
+         */
+        $namespaces = $this->app['config']['blocks.namespaces'];
+        foreach ($namespaces as $namespace => $hints) {
+            $this->app['view']->addNamespace($namespace, $hints);
+        }
+
+        /**
+         * Adds views to Acorn
+         */
+        $views = $this->app['config']->get('blocks.views');
+        $this->loadViewsFrom($views, 'blocks');
     }
 
     /**

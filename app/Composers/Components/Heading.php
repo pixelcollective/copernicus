@@ -1,10 +1,10 @@
 <?php
 
-namespace BlockModules\Composers;
+namespace BlockModules\Composers\Components;
 
 use Roots\Acorn\View\Composer;
 
-class About extends Composer
+class Heading extends Composer
 {
     /**
      * List of views served by this composer.
@@ -12,7 +12,7 @@ class About extends Composer
      * @var array
      */
     protected static $views = [
-        'blocks::tinyblocks.about.render',
+        'BlockComponents::heading.*',
     ];
 
     /**
@@ -25,9 +25,9 @@ class About extends Composer
     public function with($data, $view)
     {
         $data = [
-            'tailwind' => (object) [
-                'heading' => 'font-display text-4xl uppercase pb-4',
-            ],
+            'components' => (object) [
+                'class' => 'font-display uppercase pb-4 font-bold tracking-wide'
+            ]
         ];
 
         return $data;
