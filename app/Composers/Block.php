@@ -24,34 +24,87 @@ class Block extends Composer
      */
     public function with($data, $view)
     {
-        $this->setTemplateData($data);
+        $this->setData($data);
 
-        $data = [
-            'blockId' => $this->blockId,
-            'class'   => "{$this->classes->base} {$this->classes->unique} {$this->classes->align}",
-            'attr'    => $this->blockData->get('attr'),
-        ];
-
-        return $data;
+        return $this->getBladeData();
     }
 
-    private function setTemplateData($data)
+    /**
+     * Sets up block data and unique ID params
+     *
+     * @return void
+     */
+    public function setData($data)
     {
-        $this->blockData = collect($data)->recursive();
+        $this->id = uniqid();
+        $this->blockData = $data;
+    }
 
-        $this->blockId = uniqid();
-
-        $this->classes = (object) [
-            'base'   => "wp-block-{$this->blockData->get('attr.source.blockName')}",
-            'unique' => "wp-block-{$this->blockId}",
-            'align'  => $this->alignmentClasses($this->blockData->get('attr.align')),
+    /**
+     * Outputs to Blade view
+     *
+     * @return array
+     */
+    public function getBladeData()
+    {
+        return [
+            'id'      => $this->id,
+            'attr'    => $this->getBlockProp('attr'),
+            'name'    => $this->getBlockName(),
+            'content' => $this->getBlockProp('content'),
+            'source'  => $this->getBlockProp('attr')->source,
+            'classes' => $this->getBlockClasses(),
         ];
     }
 
-    private function alignmentClasses($alignment)
+    /**
+     * Gets a property from the block
+     *
+     * @return mixed
+     */
+    public function getBlockProp($item)
     {
-        if (!is_null($alignment)) {
-            return "align{$alignment}";
-        }
+        return $this->blockData[$item];
+    }
+
+    /**
+     * Gets the attribute block property
+     *
+     * @return string
+     */
+    public function getAttribute($attribute)
+    {
+        return isset($this->getBlockProp('attr')->$attribute)
+            ? $this->getBlockProp('attr')->$attribute : null;
+    }
+
+    /**
+     * Gets the block's name in `{namespace}-{handle}` format
+     *
+     * @return string
+     */
+    private function getBlockName()
+    {
+        return str_replace('/', '-', $this->getBlockProp('attr')->source['blockName']);
+    }
+
+    /**
+     * Fashions a CSS classname string
+     * Format: `wp-block-{blockname} wp-block-{uniqid} align{alignment}`
+     *
+     * @return string
+     */
+    private function getBlockClasses()
+    {
+        $name = $this->getBlockName();
+        $align = $this->getAttribute('align');
+        $alignClass = isset($align) ? "align{$align}" : '';
+
+        return sprintf(
+            "%s %s %s",
+            "wp-block-{$name}",
+            "wp-block-{$this->id}",
+            " {$alignClass}",
+        );
     }
 }

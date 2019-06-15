@@ -1,5 +1,7 @@
 <?php
 
+$blocks = plugin_dir_path(__DIR__) . '/blocks.json';
+
 return [
 
     /*
@@ -10,7 +12,7 @@ return [
     | The namespace used to designate blocks within JS assets
     |
     */
-    'namespace' => 'tinyblocks',
+    'namespace' => 'mutombo',
 
     /*
     |--------------------------------------------------------------------------
@@ -20,9 +22,20 @@ return [
     | The namespace used to designate blocks within JS assets
     |
     */
-    'registry' => json_decode(file_get_contents(
-        plugin_dir_path(__DIR__) . '/blocks.json'
-    )),
+    'registry' => json_decode(file_get_contents($blocks)),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Block Categories
+    |--------------------------------------------------------------------------
+    */
+    'categories' => [
+        [
+            'slug'  => 'maps',
+            'title' => __('Maps', 'tinypixel'),
+            'icon'  => 'location-alt',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +98,7 @@ return [
     |
     */
 
-    'views' => dirname(__DIR__) . '/resources/views',
+    'views' => dirname(__DIR__) . '/resources/views/blocks',
 
     /*
     |--------------------------------------------------------------------------
@@ -99,8 +112,6 @@ return [
     */
 
     'providers' => [
-        // Roots\Acorn\Assets\ManifestServiceProvider::class,
-        BlockModules\Providers\ViewServiceProvider::class,
         BlockModules\Providers\BlockModulesServiceProvider::class,
     ],
 
@@ -194,11 +205,7 @@ return [
     */
 
     'namespaces' => [
-        /*
-        | Given the below example, in your views use something like:
-        |     @include('MyPlugin::some.view.or.partial.here')
-        */
-        // 'MyPlugin' => WP_PLUGIN_DIR . '/my-plugin/resources/views',
+        'BlockComponents' => plugin_dir_path(__DIR__) . 'resources/views/blocks/components',
     ],
 
     /*
@@ -212,7 +219,10 @@ return [
     |
     */
 
-    'composers' => [],
+    'composers' => [
+        BlockModules\Composers\Block::class,
+        BlockModules\Composers\Components\Heading::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -225,6 +235,8 @@ return [
     */
 
     'directives' => [
-        'asset'  => Roots\Acorn\Assets\AssetDirective::class,
+        'block'      => \BlockModules\Directives\Block\Block::class,
+        'endblock'   => \BlockModules\Directives\Block\EndBlock::class,
+        'blockasset' => \BlockModules\Directives\BlockAsset::class,
     ],
 ];

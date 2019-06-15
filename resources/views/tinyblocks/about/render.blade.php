@@ -1,8 +1,8 @@
-<div class="{!! $class !!}">
+@block
   <div class="md:flex justify-evenly">
     <div class="flex-1">
       <div class="p-16 pt-0">
-        <img src="@blockAsset(/svg/demo.svg)" />
+        <img src="@blockasset(/svg/demo.svg)" />
       </div>
     </div>
     <div class="flex-1">
@@ -16,4 +16,4 @@
       </div>
     </div>
   </div>
-</div>
+@endblock

@@ -1,12 +1,19 @@
 const fs = require('fs')
-
 const mix = require('laravel-mix')
+
+/**
+ * Handles wp-element JSX
+ */
 require('laravel-mix-wp-blocks')
+
+// tailwind babel macros
 require('laravel-mix-tweemotional')
 
-const blocks = require('./blocks.json')
-
+// namespace
 const namespace = 'tinyblocks';
+
+// array of blocknames
+const registry = './blocks.json';
 
 const script = {
   src: (name, file) => `resources/assets/scripts/${namespace}/${name}/${file}.js`,
@@ -18,24 +25,48 @@ const style = {
   pub: (name, file) => `dist/${namespace}/${name}/${file}.css`,
 }
 
-blocks.forEach(block => {
-  mix.block(
-    script.src(block, 'editor'),
-    script.pub(block, 'editor'),
-  )
+const blocks = require(registry)
 
-  fs.existsSync(script.src(block, 'public')) &&
+blocks.forEach(block => {
+  /**
+   * Editor script
+   */
+  fs.existsSync(script.src(block, 'editor')) &&
     mix.block(
+      script.src(block, 'editor'),
+      script.pub(block, 'editor'),
+    )
+
+  /**
+   * Public script
+   */
+  fs.existsSync(script.src(block, 'public')) &&
+    mix.js(
       script.src(block, 'public'),
       script.pub(block, 'public'),
     )
 
+  /**
+   * Public script with wp-element dependencies
+   */
+  fs.existsSync(script.src(block, 'react')) &&
+    mix.block(
+      script.src(block, 'react'),
+      script.pub(block, 'react'),
+    )
+
+  /**
+   * Editor style
+   */
   fs.existsSync(style.src(block, 'editor')) &&
     mix.sass(
       style.src(block, 'editor'),
       style.pub(block, 'editor')
     )
 
+  /**
+   * Public style
+   */
   fs.existsSync(style.src(block, 'public')) &&
     mix.sass(
       style.src(block, 'public'),
@@ -43,6 +74,6 @@ blocks.forEach(block => {
     )
 })
 
-mix.tweemotional({tailwind: 'tailwind.config.js'})
+mix.tweemotional({ tailwind: 'tailwind.config.js' })
 
 mix.setPublicPath('./dist')
