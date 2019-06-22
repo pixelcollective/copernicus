@@ -77,10 +77,14 @@ Copernicus will watch for the following files in this directory:
 `public.scss`, like `public.js` and `react.js` will be enqueued only on pages which feature the block. It is strictly optional.
 
 
-## Add a view.
+## 5. Add a Blade View
 
 Your Blade view is anticipated at `/resources/views/blocks/{namespace}/{blockname}.blade.php`.
 
 Your blade view automatically has access to `$attr` and `$content`, which correspond with the attributes and inner content markup of the block as defined in your `editor.js` file.
 
 This view can be extended using components, layouts, view composers, etc.
+
+## 6. Compile block with Yarn
+
+Run `yarn build` or `yarn build:production` and you should find your new block waiting in the editor. Grats!
