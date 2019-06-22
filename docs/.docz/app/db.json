@@ -1,0 +1,271 @@
+{
+  "config": {
+    "title": "Copernicus Framework Documentation",
+    "description": "A WordPress Block Editor Framework",
+    "menu": [
+      "Overview",
+      "Getting Started",
+      "Configuration",
+      "Creating Blocks",
+      "License"
+    ],
+    "version": "0.2",
+    "repository": null,
+    "native": false,
+    "codeSandbox": true,
+    "themeConfig": {
+      "mode": "dark",
+      "colors": {
+        "codeBg": "#EB4D4B"
+      },
+      "styles": {
+        "body": "\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n        line-height: 1.9rem;\n        font-size: 1.25rem;\n      ",
+        "h1": "\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n        margin: 2rem 0rem 2rem 0rem;\n        letter-spacing: 0.05ch;\n        font-weight: 600;\n      ",
+        "h2": "\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n        margin: 2rem 0rem 2rem 0rem;\n        font-weight: 500;\n        letter-spacing 0.02ch;\n      ",
+        "h3": "\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n        margin: 1rem 0rem 1.5rem 0rem;\n      ",
+        "h4": "\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n        margin: 1rem 0rem 1.5rem 0rem;\n      ",
+        "ul": "\n        margin: 1rem 0rem 1.5rem 0rem;\n      ",
+        "ol": "\n        margin: 1rem 0rem 1.5rem 0rem;\n      ",
+        "p": "\n        margin: 1rem 0rem 1.5rem 0rem;\n        font-size: 1.4rem;\n      ",
+        "pre": "\n        font-size: 1.4rem;\n      "
+      }
+    },
+    "separator": "-",
+    "mdPlugins": [
+      null
+    ]
+  },
+  "props": [],
+  "entries": [
+    {
+      "key": "md/configuration.mdx",
+      "value": {
+        "name": "Configuration",
+        "route": "/configuration",
+        "id": "70663f01324e78e045edfdd140cc8949",
+        "filepath": "md/configuration.mdx",
+        "link": "",
+        "slug": "md-configuration",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "configuration",
+            "depth": 1,
+            "value": "Configuration"
+          },
+          {
+            "slug": "configuring-the-editor",
+            "depth": 2,
+            "value": "Configuring the Editor"
+          },
+          {
+            "slug": "use-wordpress-default-block-styles",
+            "depth": 3,
+            "value": "Use WordPress Default Block Styles"
+          },
+          {
+            "slug": "editor-color-palette",
+            "depth": 3,
+            "value": "Editor Color Palette"
+          },
+          {
+            "slug": "the-rest-of-them-options",
+            "depth": 3,
+            "value": "The rest of them options:"
+          }
+        ]
+      }
+    },
+    {
+      "key": "md/creating-blocks.mdx",
+      "value": {
+        "name": "Creating Blocks",
+        "route": "/creating-blocks",
+        "id": "696ecc16aa76beaab649c7356b923e1e",
+        "filepath": "md/creating-blocks.mdx",
+        "link": "",
+        "slug": "md-creating-blocks",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "creating-blocks",
+            "depth": 1,
+            "value": "Creating Blocks"
+          },
+          {
+            "slug": "spec",
+            "depth": 2,
+            "value": "Spec"
+          },
+          {
+            "slug": "an-editorjs-file",
+            "depth": 3,
+            "value": "An  editor.js  file"
+          },
+          {
+            "slug": "a-laravel-blade-view-for-the-frontend",
+            "depth": 3,
+            "value": "A Laravel Blade view for the frontend"
+          },
+          {
+            "slug": "1-add-the-block-to-the-registry",
+            "depth": 2,
+            "value": "1. Add the block to the registry"
+          },
+          {
+            "slug": "3-add-scripts",
+            "depth": 2,
+            "value": "3. Add scripts"
+          },
+          {
+            "slug": "editorjs",
+            "depth": 3,
+            "value": "editor.js"
+          },
+          {
+            "slug": "publicjs",
+            "depth": 3,
+            "value": "public.js"
+          },
+          {
+            "slug": "reactjs",
+            "depth": 3,
+            "value": "react.js"
+          },
+          {
+            "slug": "4-add-styles",
+            "depth": 2,
+            "value": "4. Add Styles"
+          },
+          {
+            "slug": "editorscss",
+            "depth": 3,
+            "value": "editor.scss"
+          },
+          {
+            "slug": "publicscss",
+            "depth": 3,
+            "value": "public.scss"
+          },
+          {
+            "slug": "add-a-view",
+            "depth": 2,
+            "value": "Add a view."
+          }
+        ]
+      }
+    },
+    {
+      "key": "md/getting-started.mdx",
+      "value": {
+        "name": "Getting Started",
+        "route": "/getting-started",
+        "id": "5544b8274e3bd6f141f5da7057dda359",
+        "filepath": "md/getting-started.mdx",
+        "link": "",
+        "slug": "md-getting-started",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "getting-started",
+            "depth": 1,
+            "value": "Getting Started"
+          },
+          {
+            "slug": "requirements",
+            "depth": 2,
+            "value": "Requirements"
+          },
+          {
+            "slug": "installation",
+            "depth": 2,
+            "value": "Installation"
+          },
+          {
+            "slug": "clone-copernicus-from-your-wordpress-plugin-directory",
+            "depth": 3,
+            "value": "Clone Copernicus from your WordPress Plugin directory"
+          },
+          {
+            "slug": "install-php-dependencies-using-composer",
+            "depth": 3,
+            "value": "Install PHP dependencies using Composer"
+          },
+          {
+            "slug": "install-node-dependencies-using-yarn-or-npm",
+            "depth": 3,
+            "value": "Install Node dependencies using Yarn or NPM"
+          },
+          {
+            "slug": "additional-steps",
+            "depth": 3,
+            "value": "Additional steps"
+          },
+          {
+            "slug": "activate",
+            "depth": 3,
+            "value": "Activate"
+          }
+        ]
+      }
+    },
+    {
+      "key": "md/license.mdx",
+      "value": {
+        "name": "License",
+        "route": "/license",
+        "id": "57de4562ad3490c4986b2ab042dfdcf7",
+        "filepath": "md/license.mdx",
+        "link": "",
+        "slug": "md-license",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "license",
+            "depth": 1,
+            "value": "License"
+          },
+          {
+            "slug": "mit-license",
+            "depth": 2,
+            "value": "MIT License"
+          }
+        ]
+      }
+    },
+    {
+      "key": "md/overview.mdx",
+      "value": {
+        "name": "Overview",
+        "route": "/",
+        "id": "11113e3dbbcafd0f0566b5be289bd900",
+        "filepath": "md/overview.mdx",
+        "link": "",
+        "slug": "md-overview",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "overview",
+            "depth": 1,
+            "value": "Overview"
+          },
+          {
+            "slug": "features",
+            "depth": 2,
+            "value": "Features"
+          },
+          {
+            "slug": "status",
+            "depth": 2,
+            "value": "Status"
+          },
+          {
+            "slug": "maintainers",
+            "depth": 2,
+            "value": "Maintainers"
+          }
+        ]
+      }
+    }
+  ]
+}

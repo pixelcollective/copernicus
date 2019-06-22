@@ -22,7 +22,7 @@
             'composer' => __DIR__ . '/vendor/autoload.php',
             'config'   => __DIR__ . '/config/copernicus.php',
             'requires' => (object) [
-                'php'  => '7.1.3',
+                'php'  => '7.2',
                 'wp'   => '5.2',
             ],
         ];
