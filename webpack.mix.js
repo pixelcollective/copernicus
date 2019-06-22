@@ -4,9 +4,6 @@ const mix = require('laravel-mix')
 // wordpress specific jsx
 require('laravel-mix-wp-blocks')
 
-// tailwind babel macros
-require('laravel-mix-tweemotional')
-
 // namespace
 const namespace = 'copernicus'
 
@@ -71,7 +68,5 @@ blocks.forEach(block => {
       style.pub(block, 'public')
     )
 })
-
-mix.tweemotional({ tailwind: 'tailwind.config.js' })
 
 mix.setPublicPath('./dist')
