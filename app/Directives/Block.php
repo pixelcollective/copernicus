@@ -1,11 +1,16 @@
 <?php
 
-namespace BlockModules\Directives\Block;
+namespace Copernicus\Directives;
 
-class Block
-{
-    public function __invoke()
-    {
-        return '<div class="<?php echo $classes; ?>">';
-    }
-}
+use \Copernicus\Directives\BladeDirectives\DirectivesRepository;
+
+return [
+
+    'block' => function () {
+        return '<div class="<?php echo $block->classes; ?>">';
+    },
+
+    'endblock' => function () {
+        return '</div>';
+    },
+];

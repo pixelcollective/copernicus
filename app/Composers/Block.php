@@ -1,6 +1,6 @@
 <?php
 
-namespace BlockModules\Composers;
+namespace Copernicus\Composers;
 
 use Roots\Acorn\View\Composer;
 
@@ -12,7 +12,7 @@ class Block extends Composer
      * @var array
      */
     protected static $views = [
-        'blocks::*',
+        'block::*',
     ];
 
     /**
@@ -24,47 +24,21 @@ class Block extends Composer
      */
     public function with($data, $view)
     {
-        $this->setData($data);
-
-        return $this->getBladeData();
-    }
-
-    /**
-     * Sets up block data and unique ID params
-     *
-     * @return void
-     */
-    public function setData($data)
-    {
         $this->id = uniqid();
-        $this->blockData = $data;
-    }
+        $this->data = $data;
 
-    /**
-     * Outputs to Blade view
-     *
-     * @return array
-     */
-    public function getBladeData()
-    {
         return [
-            'id'      => $this->id,
-            'attr'    => $this->getBlockProp('attr'),
-            'name'    => $this->getBlockName(),
-            'content' => $this->getBlockProp('content'),
-            'source'  => $this->getBlockProp('attr')->source,
-            'classes' => $this->getBlockClasses(),
+            'block' => (object) [
+                'id'      => $this->id,
+                'attr'    => $this->getAttributes(),
+                'name'    => $this->getBlockName(),
+                'content' => $this->getAttribute('content'),
+                'source'  => $this->getAttribute('source'),
+                'classes' => $this->getBlockClasses(),
+            ],
         ];
-    }
 
-    /**
-     * Gets a property from the block
-     *
-     * @return mixed
-     */
-    public function getBlockProp($item)
-    {
-        return $this->blockData[$item];
+        return $data;
     }
 
     /**
@@ -74,8 +48,12 @@ class Block extends Composer
      */
     public function getAttribute($attribute)
     {
-        return isset($this->getBlockProp('attr')->$attribute)
-            ? $this->getBlockProp('attr')->$attribute : null;
+        return isset($this->data['attr']->$attribute) ? $this->data['attr']->$attribute : null;
+    }
+
+    public function getAttributes()
+    {
+        return isset($this->data['attr']) ? $this->data['attr'] : null;
     }
 
     /**
@@ -85,7 +63,9 @@ class Block extends Composer
      */
     private function getBlockName()
     {
-        return str_replace('/', '-', $this->getBlockProp('attr')->source['blockName']);
+        $name = isset($this->data['attr']) ? $this->data['attr']->source['blockName'] : null;
+
+        return str_replace('/', '-', $name);
     }
 
     /**
@@ -98,6 +78,7 @@ class Block extends Composer
     {
         $name = $this->getBlockName();
         $align = $this->getAttribute('align');
+
         $alignClass = isset($align) ? "align{$align}" : '';
 
         return sprintf(

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Plugin Name:     Acorn Block Modules
- * Plugin URI:      https://github.com/pixelcollective/block-modules
- * Description:     Block loader and framework
+ * Plugin Name:     Copernicus
+ * Plugin URI:      https://github.com/pixelcollective/copernicus
+ * Description:     A WordPress editor extension framework
  * Version:         0.1.0
- * Author:          Roots
- * Author URI:      https://roots.io/
+ * Author:          Tiny Pixel Collective
+ * Author URI:      https://tinypixel.dev
  * License:         MIT License
  * Text Domain:     blockmodules
  * Domain Path:     /resources/lang
@@ -20,7 +20,7 @@
     {
         $this->plugin = (object) [
             'composer' => __DIR__ . '/vendor/autoload.php',
-            'config'   => __DIR__ . '/config/blocks.php',
+            'config'   => __DIR__ . '/config/copernicus.php',
             'requires' => (object) [
                 'php'  => '7.1.3',
                 'wp'   => '5.2',
@@ -46,28 +46,18 @@
         // load container dependencies
         require $this->plugin->composer;
 
-        // enable container globals
-        add_filter('acorn/globals', function () {
-            return true;
+        \Roots\bootloader(function (\Roots\Acorn\Application $app) {
+            $app->register(Copernicus\Providers\CopernicusServiceProvider::class);
         });
-
-        // setup container
-        $app = \Roots\Acorn\Application::getInstance();
-
-        // setup providers
-        if ($providers = collect(require $this->plugin->config)->get(
-            'providers'
-        ) ?? null) {
-            array_map([$app, 'register'], $providers);
-        }
     }
+
 
     private function checkPHPVersion()
     {
         if (version_compare($this->plugin->requires->php, phpversion(), '>')) {
             $this->error(
-                __('You must be using PHP'. $this->plugin->requires->php .'or greater.', 'blockmodules'),
-                __('Invalid PHP version', 'blockmodules')
+                __('You must be using PHP'. $this->plugin->requires->php .'or greater.', 'copernicus'),
+                __('Invalid PHP version', 'copernicus')
             );
         }
 
@@ -78,8 +68,8 @@
     {
         if (version_compare($this->plugin->requires->wp, get_bloginfo('version'), '>')) {
             $this->error(
-                __('You must be using WordPress'. $this->plugin->requires->wp .'or greater.', 'blockmodules'),
-                __('Invalid WordPress version', 'blockmodules')
+                __('You must be using WordPress'. $this->plugin->requires->wp .'or greater.', 'copernicus'),
+                __('Invalid WordPress version', 'copernicus')
             );
         }
 
@@ -88,10 +78,10 @@
 
     private function checkComposer()
     {
-        if (!isset($this->plugin->composer) && file_exists($this->plugin->composer)) {
+        if (!file_exists($this->plugin->composer)) {
             $this->error(
-                __('You must run <code>composer install</code> from the Block Modules plugin directory.', 'blockmodules'),
-                __('Autoloader not found.', 'blockmodules')
+                __('You must run <code>composer install</code> from the Block Modules plugin directory.', 'copernicus'),
+                __('Autoloader not found.', 'copernicus')
             );
         }
 
@@ -102,8 +92,8 @@
     {
         if (!isset($this->plugin->config) && file_exists($this->plugin->config)) {
             $this->error(
-                __('The configuration file must be present in the Block Modules plugin directory', 'blockmodules'),
-                __('Configuration not found.', 'blockmodules')
+                __('The configuration file must be present in the Block Modules plugin directory', 'copernicus'),
+                __('Configuration not found.', 'copernicus')
             );
         }
 
@@ -112,7 +102,7 @@
 
     private function error($message, $subtitle = '', $title = '')
     {
-        $title = $title ?: __('Acorn Block Modules Runtime Error', 'blockmodules');
+        $title = $title ?: __('Copernicus Runtime Error', 'copernicus');
         $footer = '<a href="https://tinypixel.dev/plugins/block-modules/">tinypixel.dev/plugins/block-modules/</a>';
         $message = "<h1>{$title}<br><small>{$subtitle}</small></h1><p>{$message}</p><p>{$footer}</p>";
 

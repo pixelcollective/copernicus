@@ -1,12 +1,13 @@
 <?php
 
-namespace BlockModules\Directives;
+namespace Copernicus\Directives;
 
-class BlockAssetDirective
+class BlockAsset
 {
     public function __invoke($expression)
     {
-        $pluginsUrl = plugins_url('block-modules');
+        $pluginsUrl = plugins_url('copernicus');
+
         return sprintf("%s%s", "{$pluginsUrl}/resources/assets/", $expression);
     }
 }

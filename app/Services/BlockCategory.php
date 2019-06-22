@@ -1,6 +1,6 @@
 <?php
 
-namespace BlockModules\Services;
+namespace Copernicus\Services;
 
 class BlockCategory
 {

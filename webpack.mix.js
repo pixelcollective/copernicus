@@ -1,19 +1,17 @@
 const fs = require('fs')
 const mix = require('laravel-mix')
 
-/**
- * Handles wp-element JSX
- */
+// wordpress specific jsx
 require('laravel-mix-wp-blocks')
 
 // tailwind babel macros
 require('laravel-mix-tweemotional')
 
 // namespace
-const namespace = 'tinyblocks';
+const namespace = 'copernicus'
 
 // array of blocknames
-const registry = './blocks.json';
+const registry = './blocks.json'
 
 const script = {
   src: (name, file) => `resources/assets/scripts/${namespace}/${name}/${file}.js`,

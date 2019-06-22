@@ -1,0 +1,3 @@
+@block
+  @blockSvg('demo')
+@endblock

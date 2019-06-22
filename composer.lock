@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3c1ddcccf6428b206c60a0238a6896a",
+    "content-hash": "7f46a56c774612664a7f995d2896e15c",
     "packages": [
         {
             "name": "composer/installers",
@@ -195,7 +195,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v5.8.22",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -239,7 +239,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.8.22",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -284,7 +284,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.8.22",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -328,16 +328,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v5.8.22",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "196dc9dc422d8489ff060c681be567e8483148d9"
+                "reference": "12d54c516df34c668c55a4636f7a3c921ada9c4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/196dc9dc422d8489ff060c681be567e8483148d9",
-                "reference": "196dc9dc422d8489ff060c681be567e8483148d9",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/12d54c516df34c668c55a4636f7a3c921ada9c4d",
+                "reference": "12d54c516df34c668c55a4636f7a3c921ada9c4d",
                 "shasum": ""
             },
             "require": {
@@ -384,11 +384,11 @@
                 "orm",
                 "sql"
             ],
-            "time": "2019-06-11T17:04:53+00:00"
+            "time": "2019-06-16T20:03:32+00:00"
         },
         {
             "name": "illuminate/events",
-            "version": "v5.8.22",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -433,7 +433,7 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v5.8.22",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
@@ -485,16 +485,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v5.8.22",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "0c3ef774fdfcb38dce7dc52967107423e86224c5"
+                "reference": "b05653f5ecce996734d3facd06a81aff504b6a2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/0c3ef774fdfcb38dce7dc52967107423e86224c5",
-                "reference": "0c3ef774fdfcb38dce7dc52967107423e86224c5",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/b05653f5ecce996734d3facd06a81aff504b6a2f",
+                "reference": "b05653f5ecce996734d3facd06a81aff504b6a2f",
                 "shasum": ""
             },
             "require": {
@@ -542,20 +542,20 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2019-06-12T08:34:45+00:00"
+            "time": "2019-06-19T14:12:17+00:00"
         },
         {
             "name": "illuminate/view",
-            "version": "v5.8.22",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/view.git",
-                "reference": "2680d47400f429bc4841ecc91ca5202b93a96982"
+                "reference": "2d0ab85da617cc87b3b03a2d5ff85fdb8a7c214a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/view/zipball/2680d47400f429bc4841ecc91ca5202b93a96982",
-                "reference": "2680d47400f429bc4841ecc91ca5202b93a96982",
+                "url": "https://api.github.com/repos/illuminate/view/zipball/2d0ab85da617cc87b3b03a2d5ff85fdb8a7c214a",
+                "reference": "2d0ab85da617cc87b3b03a2d5ff85fdb8a7c214a",
                 "shasum": ""
             },
             "require": {
@@ -591,20 +591,20 @@
             ],
             "description": "The Illuminate View package.",
             "homepage": "https://laravel.com",
-            "time": "2019-06-10T15:02:32+00:00"
+            "time": "2019-06-18T22:09:06+00:00"
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.52",
+            "version": "1.0.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "c5a5097156387970e6f0ccfcdf03f752856f3391"
+                "reference": "08e12b7628f035600634a5e76d95b5eb66cea674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/c5a5097156387970e6f0ccfcdf03f752856f3391",
-                "reference": "c5a5097156387970e6f0ccfcdf03f752856f3391",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/08e12b7628f035600634a5e76d95b5eb66cea674",
+                "reference": "08e12b7628f035600634a5e76d95b5eb66cea674",
                 "shasum": ""
             },
             "require": {
@@ -675,7 +675,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2019-05-20T20:21:14+00:00"
+            "time": "2019-06-18T20:09:29+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -887,12 +887,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/roots/acorn.git",
-                "reference": "3e545cfb2f0b637118249202ab5f0707ece3a4cd"
+                "reference": "bb7690cc3d5d19c4b922c2ecb6f2b89bf345f7ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/roots/acorn/zipball/3e545cfb2f0b637118249202ab5f0707ece3a4cd",
-                "reference": "3e545cfb2f0b637118249202ab5f0707ece3a4cd",
+                "url": "https://api.github.com/repos/roots/acorn/zipball/bb7690cc3d5d19c4b922c2ecb6f2b89bf345f7ea",
+                "reference": "bb7690cc3d5d19c4b922c2ecb6f2b89bf345f7ea",
                 "shasum": ""
             },
             "require": {
@@ -940,7 +940,7 @@
                 "sage",
                 "wordpress"
             ],
-            "time": "2019-06-12T08:49:19+00:00"
+            "time": "2019-06-18T12:27:27+00:00"
         },
         {
             "name": "roots/support",
@@ -1224,16 +1224,16 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v1.1.2",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "93597ce975d91c52ebfaca1253343cd9ccb7916d"
+                "reference": "cb4b18ad7b92a26e83b65dde940fab78339e6f3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/93597ce975d91c52ebfaca1253343cd9ccb7916d",
-                "reference": "93597ce975d91c52ebfaca1253343cd9ccb7916d",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/cb4b18ad7b92a26e83b65dde940fab78339e6f3c",
+                "reference": "cb4b18ad7b92a26e83b65dde940fab78339e6f3c",
                 "shasum": ""
             },
             "require": {
@@ -1277,7 +1277,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-05-27T08:16:38+00:00"
+            "time": "2019-06-13T11:15:36+00:00"
         }
     ],
     "packages-dev": [
@@ -1956,16 +1956,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.12",
+            "version": "7.5.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9ba59817745b0fe0c1a5a3032dfd4a6d2994ad1c"
+                "reference": "b9278591caa8630127f96c63b598712b699e671c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9ba59817745b0fe0c1a5a3032dfd4a6d2994ad1c",
-                "reference": "9ba59817745b0fe0c1a5a3032dfd4a6d2994ad1c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b9278591caa8630127f96c63b598712b699e671c",
+                "reference": "b9278591caa8630127f96c63b598712b699e671c",
                 "shasum": ""
             },
             "require": {
@@ -2036,7 +2036,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-05-28T11:59:40+00:00"
+            "time": "2019-06-19T12:01:51+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -2937,12 +2937,12 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "roots/acorn": 20,
         "roots/support": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1"

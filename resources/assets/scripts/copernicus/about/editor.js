@@ -7,8 +7,8 @@ import { InnerBlocks } from '@wordpress/block-editor'
 import { edit } from './components/edit'
 
 // registration
-registerBlockType('tinyblocks/about', {
-  title: __('About', 'tinyblocks'),
+registerBlockType('copernicus/demo', {
+  title: __('Demo', 'copernicus'),
   category: 'common',
   attributes: {
     heading: {

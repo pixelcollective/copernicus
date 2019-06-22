@@ -1,6 +1,6 @@
 <?php
 
-namespace BlockModules\Directives\Block;
+namespace Copernicus\Directives\Block;
 
 class EndBlock
 {

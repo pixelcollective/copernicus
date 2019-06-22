@@ -1,8 +1,8 @@
 {
-  "name": "tinypixel/blockmodules",
+  "name": "tinypixel/copernicus",
   "type": "wordpress-plugin",
   "license": "MIT",
-  "description": "Modular Block Building",
+  "description": "A WordPress editor extension framework",
   "homepage": "https://tinypixel.dev",
   "keywords": [
     "wordpress",
@@ -11,18 +11,18 @@
   ],
   "autoload": {
     "psr-4": {
-      "BlockModules\\": ["src/", "app/"]
+      "Copernicus\\": "app/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "BlockModules\\Tests\\": "tests/"
+      "Copernicus\\Tests\\": "tests/"
     }
   },
   "require": {
     "php": "^7.1",
     "composer/installers": "^1.0",
-    "roots/acorn": "dev-master#3e545cfb2f0b637118249202ab5f0707ece3a4cd",
+    "roots/acorn": "dev-master",
     "roots/support": "dev-master",
     "illuminate/support": "^5.7"
   },
@@ -32,7 +32,13 @@
     "symfony/var-dumper": "^4.2"
   },
   "scripts": {
-    "lint": "phpcs",
-    "test": "echo 'The road to hell is paved with good intentions.'"
-  }
+    "lint": "phpcs"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

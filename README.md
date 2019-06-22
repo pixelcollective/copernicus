@@ -1,9 +1,7 @@
-# WIP
+# Copernicus (Formerly known as Project Mutombo)
 
-## Quick notes:
+A WordPress Block editor extension framework
 
-1. keep your block inventory as an array of plain block names in blocks.json
-2. blocks go in resources/assets/scripts/{namespace}/{blockname}/
-3. expected endpoints: editor.js, editor.css (for editor) && public.js, public.css, react.js (for public)
-4. blockscripts only enqueued on pages that use them
-5. there is no registration, webpack, etc. beyond maintaining blocks.json in root and making sure your entrypoints are in the matching resources/assets/scripts directory.
+Documentation forthcoming soon. If you'd like to contribute, please do! Just kidding, I know I'm one of six people making blocks with javascript and probably the only person on Earth willing to write blade directives for the editor.
+
+2019+ Kelly Mears, Tiny Pixel Collective, LLC // MIT Licensed
