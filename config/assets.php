@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'uri' => plugins_url('copernicus') . '/dist',
+    'uri' => plugins_url(basename(plugin_dir_path(__DIR__))) . '/dist',
 
     /*
     |--------------------------------------------------------------------------
