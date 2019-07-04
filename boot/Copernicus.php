@@ -1,24 +1,16 @@
 <?php
 
-/**
- * Boots Copernicus
- *
- * @author Kelly Mears
- * @since v0.0.2
- * @license MIT
- */
-
 namespace Copernicus\Boot;
 
 class Copernicus
 {
-    public function __construct(str $baseDir)
+    public function __construct(string $baseDir)
     {
         /**
          * Plugin name
          * @var string
          */
-        $this->name = basename(dirname($baseDir));
+        $this->name = 'Copernicus';
 
         /**
          * Plugin dependencies
@@ -49,7 +41,7 @@ class Copernicus
          * Location of plugin translation files
          * @var string
          */
-        $this->i18nHandle = "{$this->name}/resources/languages";
+        $this->i18nHandle = "{$baseDir}/resources/languages";
     }
 
     /**
@@ -73,9 +65,6 @@ class Copernicus
      */
     public function registerWithAcorn()
     {
-        // load container dependencies
-        require $this->dependencies;
-
         \Roots\bootloader(function (\Roots\Acorn\Application $app) {
             $app->register(\Copernicus\Providers\CopernicusServiceProvider::class);
         });
@@ -89,10 +78,10 @@ class Copernicus
      */
     private function loadTextDomain()
     {
-        load_plugin_textdomain(
+        \load_plugin_textdomain(
             'copernicus',
             false,
-            $this->i18nHandle
+            dirname(plugin_basename(__FILE__)) . '/../resources/languages/'
         );
 
         return $this;
@@ -107,7 +96,7 @@ class Copernicus
         // If there is an issue with the autoloader this manually
         // loads the error handler class and uses it to throw an early
         // error
-        !file_exists($this->dependencies) && \Copernicus\Error::throw([
+        !file_exists($this->dependencies) &&  \Copernicus\Boot\Error::throw([
             'body'     => __(
                 'Copernicus needs to be installed in order to be run.<br />'.
                 'Run <code>composer install</code> from the plugin directory.',
@@ -120,6 +109,9 @@ class Copernicus
             ),
         ]);
 
+        // Load plugin dependencies
+        require $this->dependencies;
+
         return $this;
     }
 
@@ -130,7 +122,7 @@ class Copernicus
     private function checkPHPVersion()
     {
         version_compare($this->requires->php, $this->runtime->php, '>') &&
-            \Copernicus\Error::throw([
+            \Copernicus\Boot\Error::throw([
                 /* translators: PHP language version requirement */
                 'body' => sprintf(__(
                     'You must be using PHP %s or greater.',
@@ -154,7 +146,7 @@ class Copernicus
     private function checkWPVersion()
     {
         version_compare($this->requires->wp, $this->runtime->wp, '>') &&
-            \Copernicus\Error::throw([
+            \Copernicus\Boot\Error::throw([
                 /* translators: WordPress version requirement */
                 'body' => sprintf(__(
                     'You must be using WordPress %s or greater',

@@ -11,7 +11,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Copernicus\\": "app/"
+      "Copernicus\\": "app/",
+      "Copernicus\\Boot\\": "boot/"
     }
   },
   "autoload-dev": {

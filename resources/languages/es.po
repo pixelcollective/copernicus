@@ -1,64 +1,71 @@
 # Copyright (C) 2019 Tiny Pixel Collective
-# This file is distributed under the same license as the Copernicus Block Framework plugin.
+# This file is distributed under the same license as the Copernicus plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Copernicus Block Framework 0.2.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/copernicus-framework\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: Copernicus 0.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/copernicus\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-07-04T23:32:27+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.2.0\n"
+"POT-Creation-Date: 2019-07-04T22:04:15+00:00\n"
+"PO-Revision-Date: 2019-07-04 16:19-0700\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Domain: copernicus\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 
 #. Plugin Name of the plugin
-msgid "Copernicus Block Framework"
-msgstr ""
+msgid "Copernicus"
+msgstr "Copernicus"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/pixelcollective/copernicus"
-msgstr ""
+msgstr "https://github.com/pixelcollective/copernicus"
 
 #. Description of the plugin
+#, fuzzy
 msgid "A WordPress editor extension framework"
-msgstr ""
+msgstr "Un marco de extensión de editor de WordPress"
 
 #. Author of the plugin
 msgid "Tiny Pixel Collective"
-msgstr ""
+msgstr "Tiny Pixel Collective"
 
 #. Author URI of the plugin
 msgid "https://tinypixel.dev"
-msgstr ""
+msgstr "https://tinypixel.dev"
 
-#: boot/Copernicus.php:100
-msgid "Copernicus needs to be installed in order to be run.<br />Run <code>composer install</code> from the plugin directory."
+#: boot/Copernicus.php:111
+msgid ""
+"Copernicus needs to be installed in order to be run.<br />Run <code>composer "
+"install</code> from the plugin directory."
 msgstr ""
+"Copernicus necesita ser instalado para ser ejecutado. Ejecuta la instalación "
+"desde el directorio del plugin."
 
-#: boot/Copernicus.php:106
+#: boot/Copernicus.php:117
 msgid "Autoloader not found."
-msgstr ""
+msgstr "Autoloader no encontrado."
 
 #. translators: PHP language version requirement
-#: boot/Copernicus.php:127
+#: boot/Copernicus.php:135
 msgid "You must be using PHP %s or greater."
-msgstr ""
+msgstr "Debe estar utilizando PHP 7.2 o superior."
 
 #. translators: Currently installed PHP language version
-#: boot/Copernicus.php:133
+#: boot/Copernicus.php:141
 msgid "Invalid PHP version (%s)"
 msgstr ""
 
 #. translators: WordPress version requirement
-#: boot/Copernicus.php:151
+#: boot/Copernicus.php:159
 msgid "You must be using WordPress %s or greater"
 msgstr ""
 
 #. translators: Currently installed WordPress version
-#: boot/Copernicus.php:157
+#: boot/Copernicus.php:165
 msgid "Invalid WordPress version (%s)"
 msgstr ""
 

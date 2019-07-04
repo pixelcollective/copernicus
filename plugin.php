@@ -5,7 +5,7 @@
  * admin area.
  *
  * @wordpress-plugin
- * Plugin Name:     Copernicus
+ * Plugin Name:     Copernicus Block Framework
  * Plugin URI:      https://github.com/pixelcollective/copernicus
  * Description:     A WordPress editor extension framework
  * Version:         0.2.0
@@ -14,7 +14,7 @@
  * License:         MIT
  * License URI:     https://github.com/pixelcollective/copernicus/tree/master/LICENSE.md
  * Text Domain:     copernicus
- * Domain Path:     /resources/lang
+ * Domain Path:     resources/languages
  */
 
 namespace Copernicus;

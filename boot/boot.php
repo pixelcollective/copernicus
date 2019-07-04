@@ -5,7 +5,7 @@
  * @param string basePluginDir
  * @return \Copernicus\Boot\Copernicus
  */
-function bootCopernicus(str $basePluginDir)
+function bootCopernicus(string $basePluginDir)
 {
     require __DIR__ .'/Copernicus.php';
 

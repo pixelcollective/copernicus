@@ -26,13 +26,13 @@ class Error
          *
          * @see https://developer.wordpress.org/reference/files/wp-admin/includes/plugin.php/
          */
-        if (!function_exists(\deactivate_plugins)) {
+        if (!function_exists('deactivate_plugins')) {
             require_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
 
         // if plugin is activated, deactivate it
-        is_plugin_active(Copernicus::getInstance()->name) &&
-            deactivate_plugins(Copernicus::getInstance()->name);
+        is_plugin_active('copernicus') &&
+            deactivate_plugins('copernicus');
 
         // if error is an array then cast it as an object
         if (!is_null($error)) {
