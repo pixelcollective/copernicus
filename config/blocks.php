@@ -43,7 +43,7 @@ return [
     */
 
     'registry' => json_decode(file_get_contents(
-        plugin_dir_path(__DIR__) . 'blocks.json',
+        plugin_dir_path(__DIR__) . 'blocks.json'
     )),
 
     /*

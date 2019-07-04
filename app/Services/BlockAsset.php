@@ -31,7 +31,7 @@ class BlockAsset
                     "{$this->blockType}/editor/css",
                     $this->getUrl($file),
                     $dependencies,
-                    'all',
+                    'all'
                 );
             }
         });
@@ -48,7 +48,7 @@ class BlockAsset
                     $this->getUrl($file),
                     $this->getEditorDependencies($dependencies),
                     null,
-                    true,
+                    true
                 );
             }
         });
@@ -65,7 +65,7 @@ class BlockAsset
                         "{$this->blockType}/public/css",
                         $this->getUrl($file),
                         $dependencies,
-                        'all',
+                        'all'
                     );
             }
         });
@@ -83,7 +83,7 @@ class BlockAsset
                         $this->getUrl($file),
                         $dependencies,
                         null,
-                        true,
+                        true
                     );
             }
         });

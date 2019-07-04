@@ -4,7 +4,8 @@
     "dev": "NODE_ENV=development webpack --progress --hide-modules",
     "start": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "build": "NODE_ENV=production  webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "build": "NODE_ENV=production  webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "pot": "wp i18n make-pot ./ ./resources/languages/copernicus.pot"
   },
   "devDependencies": {
     "@wordpress/babel-preset-default": "^4.1.0",

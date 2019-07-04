@@ -14,15 +14,18 @@ class BladeDirectivesServiceProvider extends ServiceProvider
         $this->collectedDirectives = collect();
 
         $this->collectedDirectives->push(
-            collect($this->app['config']->get('copernicus.view.directives'))
+            collect($this->app['config']->get(
+                'copernicus.view.directives'
+            ))
         );
 
-        collect($this->app['config']->get('copernicus.view.directive_libraries'))
-            ->each(function ($library) {
-                $this->collectedDirectives->push(
-                    collect(require $library)
-                );
-            });
+        collect($this->app['config']->get(
+            'copernicus.view.directive_libraries'
+        ))->each(function ($library) {
+            $this->collectedDirectives->push(
+                collect(require $library)
+            );
+        });
     }
 
     /**

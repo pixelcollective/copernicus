@@ -32,22 +32,22 @@ return [
 
     'colorPalette' => [
         [
-            'name' => __('native scarlet', 'themeLangDomain'),
+            'name' => __('native scarlet', 'copernicus'),
             'slug' => 'native-scarlet',
             'color' => '#C31425',
         ],
         [
-            'name' => __('kuroi', 'themeLangDomain'),
+            'name' => __('kuroi', 'copernicus'),
             'slug' => 'kuroi',
             'color' => '#101820',
         ],
         [
-            'name' => __('very light gray', 'themeLangDomain'),
+            'name' => __('very light gray', 'copernicus'),
             'slug' => 'very-light-gray',
             'color' => '#eee',
         ],
         [
-            'name' => __('dark gray', 'themeLangDomain'),
+            'name' => __('dark gray', 'copernicus'),
             'slug' => 'very-dark-gray',
             'color' => '#444',
         ],
@@ -82,22 +82,22 @@ return [
 
     'fontSizes' => [
         [
-            'name' => __('Small', 'themeLangDomain'),
+            'name' => __('Small', 'copernicus'),
             'size' => 12,
             'slug' => 'small'
         ],
         [
-            'name' => __('Normal', 'themeLangDomain'),
+            'name' => __('Normal', 'copernicus'),
             'size' => 16,
             'slug' => 'normal'
         ],
         [
-            'name' => __('Large', 'themeLangDomain'),
+            'name' => __('Large', 'copernicus'),
             'size' => 36,
             'slug' => 'large'
         ],
         [
-            'name' => __('Huge', 'themeLangDomain'),
+            'name' => __('Huge', 'copernicus'),
             'size' => 50,
             'slug' => 'huge'
         ],
@@ -199,27 +199,27 @@ return [
     */
 
     'reusableBlocksLabels' => [
-        'name'                     => _x('Blocks', 'post type general name', 'gutenberg'),
-        'singular_name'            => _x('Block', 'post type singular name', 'gutenberg'),
-        'menu_name'                => _x('Blocks', 'admin menu', 'gutenberg'),
-        'name_admin_bar'           => _x('Block', 'add new on admin bar', 'gutenberg'),
-        'add_new'                  => _x('Add New', 'Block', 'gutenberg'),
-        'add_new_item'             => __('Add New Block', 'gutenberg'),
-        'new_item'                 => __('New Block', 'gutenberg'),
-        'edit_item'                => __('Edit Block', 'gutenberg'),
-        'view_item'                => __('View Block', 'gutenberg'),
-        'all_items'                => __('All Blocks', 'gutenberg'),
-        'search_items'             => __('Search Blocks', 'gutenberg'),
-        'not_found'                => __('No blocks found.', 'gutenberg'),
-        'not_found_in_trash'       => __('No blocks found in Trash.', 'gutenberg'),
-        'filter_items_list'        => __('Filter blocks list', 'gutenberg'),
-        'items_list_navigation'    => __('Blocks list navigation', 'gutenberg'),
-        'items_list'               => __('Blocks list', 'gutenberg'),
-        'item_published'           => __('Block published.', 'gutenberg'),
-        'item_published_privately' => __('Block published privately.', 'gutenberg'),
-        'item_reverted_to_draft'   => __('Block reverted to draft.', 'gutenberg'),
-        'item_scheduled'           => __('Block scheduled.', 'gutenberg'),
-        'item_updated'             => __('Block updated.', 'gutenberg'),
+        'name'                     => _x('Blocks', 'post type general name', 'copernicus'),
+        'singular_name'            => _x('Block', 'post type singular name', 'copernicus'),
+        'menu_name'                => _x('Blocks', 'admin menu', 'copernicus'),
+        'name_admin_bar'           => _x('Block', 'add new on admin bar', 'copernicus'),
+        'add_new'                  => _x('Add New', 'Block', 'copernicus'),
+        'add_new_item'             => __('Add New Block', 'copernicus'),
+        'new_item'                 => __('New Block', 'copernicus'),
+        'edit_item'                => __('Edit Block', 'copernicus'),
+        'view_item'                => __('View Block', 'copernicus'),
+        'all_items'                => __('All Blocks', 'copernicus'),
+        'search_items'             => __('Search Blocks', 'copernicus'),
+        'not_found'                => __('No blocks found.', 'copernicus'),
+        'not_found_in_trash'       => __('No blocks found in Trash.', 'copernicus'),
+        'filter_items_list'        => __('Filter blocks list', 'copernicus'),
+        'items_list_navigation'    => __('Blocks list navigation', 'copernicus'),
+        'items_list'               => __('Blocks list', 'copernicus'),
+        'item_published'           => __('Block published.', 'copernicus'),
+        'item_published_privately' => __('Block published privately.', 'copernicus'),
+        'item_reverted_to_draft'   => __('Block reverted to draft.', 'copernicus'),
+        'item_scheduled'           => __('Block scheduled.', 'copernicus'),
+        'item_updated'             => __('Block updated.', 'copernicus'),
     ],
 
     /*

@@ -25,13 +25,13 @@ class Gutenberg
         $this->settings = $this->deriveSettingsFromConfig($config);
         $this->setOptions();
 
-        add_action('init', [
-            $this, 'setReusableBlockOptions'
-        ]);
+        add_action('init', [$this, 'setReusableBlockOptions']);
     }
 
     /**
      * Collect valid inputs to gutenberg configuration file
+     * @param array configuration values
+     * @return \Illuminate\Support\Collection settings
      */
     public function deriveSettingsFromConfig(Array $config)
     {
@@ -48,6 +48,8 @@ class Gutenberg
 
     /**
      * Ensure config value is present and not blank
+     * @param var optionValue
+     * @return binary validity
      */
     public function isValidSetting($optionValue)
     {

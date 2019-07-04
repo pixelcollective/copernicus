@@ -1,14 +1,16 @@
+/**
+ * Dependencies
+ */
 const fs = require('fs')
 const mix = require('laravel-mix')
 
 // wordpress specific jsx
 require('laravel-mix-wp-blocks')
 
-// namespace
+/**
+ * Project configuration
+ */
 const namespace = 'copernicus'
-
-// array of blocknames
-const registry = './blocks.json'
 
 const script = {
   src: (name, file) => `resources/assets/scripts/${namespace}/${name}/${file}.js`,
@@ -20,7 +22,7 @@ const style = {
   pub: (name, file) => `dist/${namespace}/${name}/${file}.css`,
 }
 
-const blocks = require(registry)
+const blocks = require('./blocks.json')
 
 blocks.forEach(block => {
   /**

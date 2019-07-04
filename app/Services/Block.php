@@ -43,7 +43,7 @@ class Block
             ->addPublicStyles('public.css')
             ->addPublicScript('public.js')
             ->addPublicScript('react.js', [
-                'wp-element'
+                'wp-element',
             ]);
     }
 
@@ -56,7 +56,7 @@ class Block
             'render_callback' => function ($attributes, $content) {
                 return $this->app['view']->make(
                     "block::{$this->blockName}",
-                    $this->data($attributes, $content),
+                    $this->data($attributes, $content)
                 );
             },
         ]);
@@ -69,7 +69,7 @@ class Block
     {
         return [
             'attr' => (object) $attributes,
-            'content' => $content
+            'content' => $content,
         ];
     }
 
