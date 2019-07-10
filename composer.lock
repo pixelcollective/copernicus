@@ -284,7 +284,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.8.27",
+            "version": "v5.8.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -485,16 +485,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v5.8.27",
+            "version": "v5.8.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "5d32b3079433ee85db7b33825a1648553a09d410"
+                "reference": "b60e70c9bd3c6d61cbb4343459755470fd5ad818"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/5d32b3079433ee85db7b33825a1648553a09d410",
-                "reference": "5d32b3079433ee85db7b33825a1648553a09d410",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/b60e70c9bd3c6d61cbb4343459755470fd5ad818",
+                "reference": "b60e70c9bd3c6d61cbb4343459755470fd5ad818",
                 "shasum": ""
             },
             "require": {
@@ -542,7 +542,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2019-06-30T07:30:42+00:00"
+            "time": "2019-07-05T17:41:14+00:00"
         },
         {
             "name": "illuminate/view",
@@ -887,12 +887,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/roots/acorn.git",
-                "reference": "90a4c19b2ec7d65f98b125bba3f92f5a88433dce"
+                "reference": "435e6e8b976f0a4d94f282380a293e4df12d6b20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/roots/acorn/zipball/90a4c19b2ec7d65f98b125bba3f92f5a88433dce",
-                "reference": "90a4c19b2ec7d65f98b125bba3f92f5a88433dce",
+                "url": "https://api.github.com/repos/roots/acorn/zipball/435e6e8b976f0a4d94f282380a293e4df12d6b20",
+                "reference": "435e6e8b976f0a4d94f282380a293e4df12d6b20",
                 "shasum": ""
             },
             "require": {
@@ -940,7 +940,7 @@
                 "sage",
                 "wordpress"
             ],
-            "time": "2019-06-23T15:47:22+00:00"
+            "time": "2019-07-08T22:33:01+00:00"
         },
         {
             "name": "roots/support",
