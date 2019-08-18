@@ -1,0 +1,31 @@
+<?php
+
+namespace DummyNamespace;
+
+use TinyPixel\Copernicus\View\Composer;
+
+class DummyClass extends Composer
+{
+    /**
+     * List of views served by this composer.
+     *
+     * @var array
+     */
+    protected static $views = [
+        DummyViews
+    ];
+
+    /**
+     * Data to be passed to view before rendering.
+     *
+     * @param  array $data
+     * @param  \Illuminate\View\View $view
+     * @return array
+     */
+    public function with($data, $view)
+    {
+        return [
+            //
+        ];
+    }
+}

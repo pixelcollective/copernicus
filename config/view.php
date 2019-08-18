@@ -1,7 +1,5 @@
 <?php
 
-$base = plugin_dir_path(__DIR__);
-
 return [
 
     /*
@@ -15,8 +13,35 @@ return [
     */
 
     'paths' => [
-        "{$base}resources/views",
+        plugin_dir_path(__DIR__) . 'resources/views',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Compiled View Path
+    |--------------------------------------------------------------------------
+    |
+    | This option determines where all the compiled Blade templates will be
+    | stored for your application. Typically, this is within the uploads
+    | directory. However, as usual, you are free to change this value.
+    |
+    */
+
+    'compiled' => plugin_dir_path(__DIR__) . 'storage/framework/views',
+
+    /*
+    |--------------------------------------------------------------------------
+    | View Debugger
+    |--------------------------------------------------------------------------
+    |
+    | Enabling this option will display the current view name and data. Giving
+    | it a value of 'view' will only display view names. Giving it a value of
+    | 'data' will only display current data. Giving it any other truthy value
+    | will display both.
+    |
+    */
+
+    'debug' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +56,11 @@ return [
     */
 
     'namespaces' => [
-        'block' => "{$base}resources/views/blocks",
+        /*
+         | Given the below example, in your views use something like:
+         |     @include('MyPlugin::some.view.or.partial.here')
+         */
+        // 'MyPlugin' => WP_PLUGIN_DIR . '/my-plugin/resources/views',
     ],
 
     /*
@@ -46,51 +75,44 @@ return [
     */
 
     'composers' => [
-
-        /*
-        |--------------------------------------------------------------------------
-        | Global
-        |--------------------------------------------------------------------------
-        |
-        */
-
-        Copernicus\Composers\Block::class,
-
-        /*
-        |--------------------------------------------------------------------------
-        | Blocks
-        |--------------------------------------------------------------------------
-        |
-        */
-
-        /*
-        |--------------------------------------------------------------------------
-        | Components
-        |--------------------------------------------------------------------------
-        |
-        */
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Blade Directives
+    | View Directives
     |--------------------------------------------------------------------------
+    |
+    | The namespaces where view components reside. Components can be referenced
+    | with camelCase & dot notation.
     |
     */
 
-    'directives' => [],
+    'directives' => [
+    ],
 
-    /*
+   /*
     |--------------------------------------------------------------------------
-    | Blade Directives by filepath
+    | Blade Component Aliases
     |--------------------------------------------------------------------------
+    |
+    | Component aliases allow you to use a shorthand to call a Blade component.
+    | Instead of referencing your components like this:
+    |
+    | @component('components.alert', ['type' => 'warning'])
+    |   {{ __('Page not found') }}
+    | @endcomponent
+    |
+    | You can use an alias instead:
+    |
+    | @alert(['type' => 'error'])
+    |   {{ __('Page not found') }}
+    | @endalert
+    |
+    | Use the key to set the alias and the value to set the path to the
+    | view.
     |
     */
 
-    'directive_libraries' => [
-        "{$base}app/Directives/Block.php",
-        "{$base}app/Directives/SVGDirectives.php",
-        "{$base}app/Directives/StyleDirectives.php",
-        "{$base}app/Directives/BladeDirectives/BladeDirectives.php",
+    'components' => [
     ],
 ];

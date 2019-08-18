@@ -1,3 +1,1 @@
-@block
-  @blockSvg('demo')
-@endblock
+<h1>Hello</h1>

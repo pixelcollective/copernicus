@@ -1,6 +1,8 @@
 <?php
 
-namespace Copernicus\Services;
+namespace Copernicus\App\Services;
+
+use TinyPixel\Copernicus\Copernicus as Application;
 
 class BlockCategory
 {

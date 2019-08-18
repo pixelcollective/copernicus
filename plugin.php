@@ -1,10 +1,6 @@
 <?php
 
 /**
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area.
- *
- * @wordpress-plugin
  * Plugin Name:     Copernicus Block Framework
  * Plugin URI:      https://github.com/pixelcollective/copernicus
  * Description:     A WordPress editor extension framework
@@ -17,10 +13,14 @@
  * Domain Path:     resources/languages
  */
 
-namespace Copernicus;
+require_once __DIR__ . '/vendor/autoload.php';
 
-require __DIR__ .'/boot/boot.php';
+use TinyPixel\Copernicus\Copernicus;
+use TinyPixel\Copernicus\Bootloader;
 
-$copernicus = bootCopernicus(__DIR__);
-
-// EOF
+(new class {
+    public function __invoke(array $hooks, string $basePath)
+    {
+        (new Bootloader($hooks, Copernicus::class, $basePath))();
+    }
+})(['after_setup_theme', 'rest_api_init'], __DIR__);

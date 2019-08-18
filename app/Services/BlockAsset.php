@@ -1,8 +1,9 @@
 <?php
 
-namespace Copernicus\Services;
+namespace Copernicus\App\Services;
 
-use \Roots\Acorn\Application;
+use TinyPixel\Copernicus\Copernicus as Application;
+
 
 class BlockAsset
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Copernicus\Composers;
+namespace Copernicus\App\Composers;
 
 use Roots\Acorn\View\Composer;
 
