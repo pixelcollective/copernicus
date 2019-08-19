@@ -3,30 +3,66 @@
 namespace TinyPixel\Copernicus\Blocks;
 
 use function \add_filter;
+use Illuminate\Support\Collection;
 use TinyPixel\Copernicus\Copernicus as Application;
 
 /**
- * Block category manager.
+ * Block category manager
+ *
  */
 class BlockCategoryManager
 {
     /**
-     * Register
+     * Categories
      *
-     * @param $category
+     * @var \Illuminate\Support\Collection
+     */
+    protected $categories;
+
+    /**
+     * Constructor.
      *
+     */
+    public function __construct()
+    {
+        $this->categories = Collection::make();
+    }
+
+    /**
+     * Add category.
+     *
+     * @param  string $name
+     * @param  string $title
+     * @param  string $icon
      * @return void
      */
-    public function register($category) : void
-    {
-        add_filter('block_categories', function ($categories, $post) use ($category) {
-            $categories = array_merge($categories, [[
-                'slug'  => $category['slug'],
-                'title' => $category['title'],
-                'icon'  => $category['icon'],
-            ]]);
+    public function add(
+        string $name,
+        string $title,
+        string $icon
+    ) : void {
+        $this->categories->push([
+            'slug'  => $name,
+            'title' => $title,
+            'icon'  => $icon,
+        ]);
+    }
 
-            return $categories;
+    /**
+     * Register categories.
+     *
+     * @uses   \add_filter
+     * @param  $category
+     * @return void
+     */
+    public function register() : void
+    {
+        \add_filter('block_categories', function ($categories, $post) {
+            $mergedCategories = $this->categories->merge(
+                Collection::make($categories)
+            );
+
+            return $mergedCategories->toArray();
         }, 10, 2);
     }
 }

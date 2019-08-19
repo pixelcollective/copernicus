@@ -2,6 +2,7 @@
 
 namespace TinyPixel\Copernicus\Blocks;
 
+use TinyPixel\Copernicus\Blocks\Asset;
 use TinyPixel\Copernicus\Copernicus as Application;
 
 /**
@@ -19,18 +20,19 @@ class BlockAssetManager
     {
         $this->app = $app;
 
-        $this->baseUrl  = $this->app['config']->get('filesystems.disks.local.url') .'/dist/';
+        $this->baseUrl  = $this->app['config']->get('filesystems.disks.local.url') . '/dist/';
         $this->basePath = $this->app['config']->get('filesystems.disks.local.root');
 
         return $this;
     }
 
     /**
-     * New asset
+     * Add asset.
      *
-     * @param string $assetName
+     * @param  string $assetName
+     * @return TinyPixel\Copernicus\Blocks\Asset
      */
-    public function new($assetName)
+    public function add($assetName) : BlockAsset
     {
         $this->{$assetName} = $this->app->make('block.asset');
 

@@ -17,11 +17,18 @@ class Registry extends BlockRegistry
      *
      * @param BlockAssetManager $assets
      */
-    public function assets(BlockAssetManager $assets)
+    public function assets()
     {
-        $assets->new('demo/js')->editorScript('demo-editor.js');
-        $assets->new('demo/css')->editorStyle('demo.css');
-        $assets->new('demo/public/css')->script('demo.js', ['react']);
+        $this->assets->add('demo/js')
+               ->editorScript('demo-editor.js');
+
+        $this->assets->add('demo/css')
+               ->editorStyle('demo.css');
+
+        $this->assets->add('demo/public/js')
+               ->script('demo.js')
+               ->dependsOn(['react'])
+               ->loadsAlongside('demo');
     }
 
     /**
@@ -31,6 +38,17 @@ class Registry extends BlockRegistry
      */
     public function blocks()
     {
-        $this->blocks->register('demo')->with('demo');
+        $this->blocks->add('demo')
+                     ->withView('demo');
+    }
+
+    /**
+     * Block categories.
+     *
+     * @return void
+     */
+    public function categories()
+    {
+        $this->categories->add('demo', 'Demo', 'general');
     }
 }

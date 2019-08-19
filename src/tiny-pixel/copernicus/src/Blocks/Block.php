@@ -10,36 +10,44 @@ use TinyPixel\Copernicus\Copernicus as Application;
  */
 class Block
 {
-    public function viewFactory($view) {
+    /**
+     * View
+     *
+     * @var \Illuminate\View\Factory
+     */
+    protected $view;
+
+    /**
+     * Namespace
+     *
+     * @var string
+     */
+    protected $namespace;
+
+    /**
+     * Name
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * View template
+     *
+     * @var string
+     */
+    protected $viewTemplate;
+
+    /**
+     * Set view factory
+     *
+     * @param Illuminate\View\Factory $view
+     *
+     * @return TinyPixel\Copernicus\Blocks\Block
+     */
+    public function viewFactory($view) : Block
+    {
         $this->view = $view;
-
-        return $this;
-    }
-
-    /**
-     * Set block name.
-     *
-     * @param  string $namespace
-     *
-     * @return TinyPixel\Copernicus\Blocks\Block
-     */
-    public function setNamespace($namespace)
-    {
-        $this->namespace = $namespace;
-
-        return $this;
-    }
-
-    /**
-     * Set block name.
-     *
-     * @param string $name
-     *
-     * @return TinyPixel\Copernicus\Blocks\Block
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
 
         return $this;
     }
@@ -49,13 +57,13 @@ class Block
      *
      * @param  string $view
      *
-     * @return void
+     * @return TinyPixel\Copernicus\Blocks\Block
      */
-    public function with($viewTemplate)
+    public function withView(string $viewTemplate) : Block
     {
-        if(isset($viewTemplate)) {
-            $this->viewTemplate = $viewTemplate;
-        }
+        $this->viewTemplate = $viewTemplate;
+
+        return $this;
     }
 
     /**
@@ -66,9 +74,10 @@ class Block
     public function register() : Block
     {
         \register_block_type($this->blockName(), [
-            'render_callback' => $this->viewTemplate ?
-                [$this, 'render'] :
-                null,
+            'render_callback' =>
+                isset($this->viewTemplate)
+                    ? [$this, 'render']
+                    : null,
         ]);
 
         return $this;
@@ -84,7 +93,10 @@ class Block
      */
     public function render($attributes, $content)
     {
-        return $this->view->make($this->viewTemplate, $this->data($attributes, $content));
+        return $this->view->make(
+            $this->viewTemplate,
+            $this->data($attributes, $content)
+        );
     }
 
     /**
@@ -103,11 +115,12 @@ class Block
     /**
      * Expose inner contents to Blade
      *
+     * @uses   add_filter
      * @return void
      */
     private function modifyBlockData() : void
     {
-        add_filter('render_block_data', function ($block, $source_block) {
+        \add_filter('render_block_data', function ($block, $source_block) {
             $block['attrs']['source'] = $source_block;
             return $block;
         }, 10, 2);
@@ -121,5 +134,33 @@ class Block
     public function blockName() : string
     {
         return "{$this->namespace}/{$this->name}";
+    }
+
+    /**
+     * Set block namespace.
+     *
+     * @param  string $namespace
+     *
+     * @return TinyPixel\Copernicus\Blocks\Block
+     */
+    public function setNamespace($namespace) : Block
+    {
+        $this->namespace = $namespace;
+
+        return $this;
+    }
+
+    /**
+     * Set block name.
+     *
+     * @param string $name
+     *
+     * @return TinyPixel\Copernicus\Blocks\Block
+     */
+    public function setName($name) : Block
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }
