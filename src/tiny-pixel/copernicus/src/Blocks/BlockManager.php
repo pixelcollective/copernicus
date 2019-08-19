@@ -37,17 +37,14 @@ class BlockManager
      * @param Illuminate\View\Factory                $view
      * @param string                                 $namespace
      */
-    public function __construct(
-        Application $app,
-        BlockAssetManager $assetManager,
-        View $view,
-        string $namespace
-    ) {
+    public function __construct(Application $app, string $namespace) {
         $this->app          = $app;
-        $this->view         = $view;
+        $this->view         = $app->make('view');
         $this->namespace    = $namespace;
-        $this->assetManager = $assetManager;
+        $this->assetManager = $app->make('block.assetManager');
         $this->blocks       = Collection::make();
+
+        return $this;
     }
 
     /**
@@ -59,7 +56,7 @@ class BlockManager
      */
     public function register(String $blockName) : Block
     {
-        $this->{$blockName} = $this->app->make('block');
+        $this->{$blockName} = $this->app->make('block')->viewFactory($this->view);
 
         $this->{$blockName}
              ->setNamespace($this->namespace)

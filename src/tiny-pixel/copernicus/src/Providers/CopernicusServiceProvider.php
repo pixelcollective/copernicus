@@ -31,8 +31,6 @@ class CopernicusServiceProvider extends ServiceProvider
         $this->app->bind('block.manager', function ($app) {
             return new BlockManager(
                 $app,
-                $app->make('block.assetManager'),
-                $app->make('view'),
                 $app['config']->get('blocks.namespace')
             );
         });

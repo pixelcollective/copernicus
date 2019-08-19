@@ -21,20 +21,16 @@ class Registry extends BlockRegistry
     {
         $assets->new('demo/js')->editorScript('demo-editor.js');
         $assets->new('demo/css')->editorStyle('demo.css');
-        $assets->new('demo/public/css')->script('demo.js', [
-            'react',
-        ]);
+        $assets->new('demo/public/css')->script('demo.js', ['react']);
     }
 
     /**
      * Blocks.
      *
-     * @param  BlockManager $blocks
-     *
      * @return void
      */
-    public function blocks(BlockManager $blocks)
+    public function blocks()
     {
-        $blocks->register('demo')->with('demo');
+        $this->blocks->register('demo')->with('demo');
     }
 }

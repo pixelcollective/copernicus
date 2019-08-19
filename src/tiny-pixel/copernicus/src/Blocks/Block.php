@@ -10,6 +10,19 @@ use TinyPixel\Copernicus\Copernicus as Application;
  */
 class Block
 {
+    public function viewFactory($view) {
+        $this->view = $view;
+
+        return $this;
+    }
+
+    /**
+     * Set block name.
+     *
+     * @param  string $namespace
+     *
+     * @return TinyPixel\Copernicus\Blocks\Block
+     */
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
@@ -17,6 +30,13 @@ class Block
         return $this;
     }
 
+    /**
+     * Set block name.
+     *
+     * @param string $name
+     *
+     * @return TinyPixel\Copernicus\Blocks\Block
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -24,10 +44,17 @@ class Block
         return $this;
     }
 
-    public function with($view)
+    /**
+     * With view template.
+     *
+     * @param  string $view
+     *
+     * @return void
+     */
+    public function with($viewTemplate)
     {
         if(isset($viewTemplate)) {
-            $this->viewTemplate = $view;
+            $this->viewTemplate = $viewTemplate;
         }
     }
 
@@ -55,12 +82,9 @@ class Block
      *
      * @return Illuminate\View\View
      */
-    public function render($attributes, $content) : View
+    public function render($attributes, $content)
     {
-        return $this->view->make(
-            $this->viewTemplate,
-            $this->data($attributes, $content)
-        );
+        return $this->view->make($this->viewTemplate, $this->data($attributes, $content));
     }
 
     /**

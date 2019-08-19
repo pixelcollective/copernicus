@@ -21,8 +21,11 @@ class BlockRegistry
 
     public function init()
     {
-        $this->blocks($this->app->make('block.manager'));
-        $this->assets($this->app->make('block.assetManager'));
+        $this->blocks = $this->app->make('block.manager');
+        $this->blocks();
+        $this->blocks->registerBlocks();
+
+        $assets = $this->assets($this->app->make('block.assetManager'));
 
         // add_action('wp_enqueue_scripts', [$this, 'debug']);
     }
