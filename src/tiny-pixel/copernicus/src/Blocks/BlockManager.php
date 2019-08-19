@@ -52,10 +52,38 @@ class BlockManager
     /**
      * Register block.
      *
+     * Accepts a string or array of blocks to register.
+     * Arrays return void.
+     * Strings return the Block for continued manipulation.
+     *
+     * @param  {array|string} $blocks
+     * @return {TinyPixel\Copernicus\Blocks\Block|void}
+     */
+    public function add($blocks, string $viewTemplate = null)
+    {
+        if (is_string($blocks)) {
+            return $this->addBlock($blocks, isset($viewTemplate) ?
+                $viewTemplate : null
+            );
+        }
+
+        if (is_array($blocks)) {
+            Collection::make($blocks)->each(function ($block) use ($viewTemplate) {
+                return $this->addBlock($block, isset($viewTemplate) ?
+                    $viewTemplate : null
+                );
+            });
+        }
+    }
+
+    /**
+     * Add block.
+     *
      * @param  string $blockName
+     * @param  string $viewTemplate
      * @return TinyPixel\Copernicus\Blocks\Block
      */
-    public function add(String $blockName) : Block
+    public function addBlock(string $blockName, string $viewTemplate = null) : Block
     {
         /**
          * Create a new block.
@@ -73,6 +101,13 @@ class BlockManager
         $this->{$blockName}
              ->setNamespace($this->namespace)
              ->setName($blockName);
+
+        /**
+         * Set view template if specified
+         */
+        if(isset($viewTemplate)) {
+            $this->{$blockName}->withView($viewTemplate);
+        }
 
         /**
          * Add block to stack of registered blocks.

@@ -25,7 +25,7 @@ publicScripts.forEach(block => {
   )
 })
 
-const editorScripts = ['demo-editor']
+const editorScripts = ['index']
 editorScripts.forEach(block => {
   mix.block(
     script.src(block, 'editor'),

@@ -39,7 +39,7 @@ class Block
     protected $viewTemplate;
 
     /**
-     * Set view factory
+     * Set view factory.
      *
      * @param Illuminate\View\Factory $view
      *
@@ -67,7 +67,7 @@ class Block
     }
 
     /**
-     * Register block with WordPress
+     * Register block with WordPress.
      *
      * @return TinyPixel\Copernicus\Blocks\BlockManager
      */
@@ -100,7 +100,7 @@ class Block
     }
 
     /**
-     * Formats data for easier work in composer
+     * Formats data for easier work in composer.
      *
      * @return array
      */
@@ -113,7 +113,7 @@ class Block
     }
 
     /**
-     * Expose inner contents to Blade
+     * Expose inner contents.
      *
      * @uses   add_filter
      * @return void

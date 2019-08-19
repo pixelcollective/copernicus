@@ -19,16 +19,11 @@ class Registry extends BlockRegistry
      */
     public function assets()
     {
-        $this->assets->add('demo/js')
-               ->editorScript('demo-editor.js');
+        $this->assets->add('demo.editor.js')
+                ->editorScript('index.js');
 
-        $this->assets->add('demo/css')
-               ->editorStyle('demo.css');
-
-        $this->assets->add('demo/public/js')
-               ->script('demo.js')
-               ->dependsOn(['react'])
-               ->loadsAlongside('demo');
+        $this->assets->add('demo.editor.css')
+                ->editorStyle('demo.css');
     }
 
     /**
@@ -38,8 +33,26 @@ class Registry extends BlockRegistry
      */
     public function blocks()
     {
-        $this->blocks->add('demo')
-                     ->withView('demo');
+        /**
+         * Example: add a block and set its view:
+         *
+         * $this->blocks->add('demo')->withView('demo');
+         **/
+
+        /**
+         * Example: add two blocks and set their views en masse:
+         *
+         * $this->blocks->add(['demo', 'demo2'], 'demo');
+         **/
+
+        /**
+         * Example: if a block name matches a view filename,
+         * you may add it as part of a group:
+         *
+         * $this->add(['my-block', 'demo']);
+         */
+
+        $this->blocks->add('my-block')->withView('my-block');
     }
 
     /**
@@ -49,6 +62,7 @@ class Registry extends BlockRegistry
      */
     public function categories()
     {
+        // params: block slug, block title, block icon
         $this->categories->add('demo', 'Demo', 'general');
     }
 }

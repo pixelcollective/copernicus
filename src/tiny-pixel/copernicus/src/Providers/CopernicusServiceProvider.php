@@ -36,7 +36,7 @@ class CopernicusServiceProvider extends ServiceProvider
          * Individual block asset.
          */
         $this->app->bind('block.asset', function ($app) {
-            return new BlockAsset();
+            return new BlockAsset($app);
         });
 
         /**

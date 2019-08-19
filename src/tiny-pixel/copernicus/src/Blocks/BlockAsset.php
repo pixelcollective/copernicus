@@ -22,11 +22,7 @@ class BlockAsset
      *
      * @var Illuminate\Support\Collection
      */
-    protected $editorDependencies = [
-        'wp-editor',
-        'wp-element',
-        'wp-blocks',
-    ];
+    protected $editorDependencies;
 
     /**
      * Dependencies
@@ -38,14 +34,19 @@ class BlockAsset
     /**
      * Construct.
      *
+     * @param  TinyPixel\Copernicus\Copernicus $app
      */
-    public function __construct()
+    public function __construct(Application $app)
     {
-        $this->editorDependencies = Collection::make(
-            $this->editorDependencies
-        );
+        $this->editorDependencies = Collection::make([
+            'wp-editor',
+            'wp-element',
+            'wp-blocks',
+        ]);
 
         $this->dependsOn = Collection::make();
+
+        $this->namespace = $app['config']->get('blocks.namespace');
 
         return $this;
     }
@@ -99,7 +100,9 @@ class BlockAsset
      */
     public function dependsOn(array $dependencies) : BlockAsset
     {
-        $this->dependsOn->merge($dependencies);
+        Collection::make($dependencies)->each(function ($dependency) {
+            $this->dependsOn->push($dependency);
+        });
 
         return $this;
     }
@@ -161,12 +164,9 @@ class BlockAsset
     {
         add_action('wp_enqueue_scripts', function () use ($file) {
             if (file_exists($this->getPath($file))) {
-                if (isset($this->loadsAlongside)
-                && !has_block($this->loadsAlongside)) {
-                    return;
-                }
-
-                wp_enqueue_style(
+                return (isset($this->loadsAlongside) && !has_block(
+                    $this->qualify($this->loadsAlongside)
+                )) ? null : wp_enqueue_style(
                     $this->label,
                     $this->getUrl($file),
                     $this->dependencies(),
@@ -188,12 +188,9 @@ class BlockAsset
     {
         add_action('wp_enqueue_scripts', function () use ($file) {
             if (file_exists($this->getPath($file))) {
-                if(isset($this->loadsAlongside)
-                && !has_block($this->loadsAlongside)) {
-                    return;
-                }
-
-                wp_enqueue_script(
+                return (isset($this->loadsAlongside) && !has_block(
+                    $this->qualify($this->loadsAlongside)
+                )) ? null : wp_enqueue_script(
                     $this->label,
                     $this->getUrl($file),
                     $this->dependencies(),
@@ -204,6 +201,16 @@ class BlockAsset
         });
 
         return $this;
+    }
+
+    /**
+     * Returns blockname qualified with namespace.
+     *
+     * @param  string $blockName
+     * @return string
+     */
+    public function qualify(string $blockName) {
+        return "{$this->namespace}/{$blockName}";
     }
 
     /**
@@ -248,8 +255,10 @@ class BlockAsset
      */
     public function editorDependencies() : array
     {
-        if(isset($this->dependsOn)) {
-            $this->editorDependencies->merge($this->dependsOn);
+        if(!$this->dependsOn->isEmpty()) {
+            $this->dependsOn->each(function ($dependency) {
+                $this->editorDependencies->push($dependency);
+            });
         }
 
         return $this->editorDependencies->toArray();

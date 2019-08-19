@@ -15,4 +15,14 @@ return [
 
     'namespace' => 'copernicus',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Debug assets
+    |--------------------------------------------------------------------------
+    |
+    | Dump wp_scripts and wp_styles globals in case you need a guiding light.
+    |
+    */
+
+    'debug' => false,
 ];

@@ -82,4 +82,17 @@ class BlockRegistry
 
         dd([$wp_styles, $wp_scripts]);
     }
+
+    /**
+     * Convenience method to add blocks with matching
+     * view and block names.
+     *
+     * @param  array $blocks
+     */
+    public function add(array $blocks)
+    {
+        foreach($blocks as $block) {
+            $this->blocks->add($block)->withView($block);
+        }
+    }
 }
