@@ -3,9 +3,6 @@ import { __ } from '@wordpress/i18n'
 import { registerBlockType } from '@wordpress/blocks'
 import { InnerBlocks } from '@wordpress/block-editor'
 
-// components
-import { edit } from './components/edit'
-
 // registration
 registerBlockType('copernicus/demo', {
   title: __('Demo', 'copernicus'),
@@ -22,6 +19,6 @@ registerBlockType('copernicus/demo', {
   supports: {
     align: true,
   },
-  edit,
+  edit: () => <div></div>,
   save: () => <InnerBlocks.Content />,
 })

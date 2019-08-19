@@ -13,7 +13,7 @@ return [
     */
 
     'paths' => [
-        plugin_dir_path(__DIR__) . 'resources/views',
+        plugin_dir_path(__DIR__) . 'blocks/views',
     ],
 
     /*
@@ -56,11 +56,7 @@ return [
     */
 
     'namespaces' => [
-        /*
-         | Given the below example, in your views use something like:
-         |     @include('MyPlugin::some.view.or.partial.here')
-         */
-        // 'MyPlugin' => WP_PLUGIN_DIR . '/my-plugin/resources/views',
+        //
     ],
 
     /*
@@ -75,6 +71,7 @@ return [
     */
 
     'composers' => [
+        //
     ],
 
     /*
@@ -88,6 +85,7 @@ return [
     */
 
     'directives' => [
+        //
     ],
 
    /*
@@ -114,5 +112,6 @@ return [
     */
 
     'components' => [
+        //
     ],
 ];

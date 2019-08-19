@@ -1,12 +1,23 @@
 <?php
 
-namespace Copernicus\App\Services;
+namespace TinyPixel\Copernicus\Blocks;
 
+use function \add_filter;
 use TinyPixel\Copernicus\Copernicus as Application;
 
-class BlockCategory
+/**
+ * Block category manager.
+ */
+class BlockCategoryManager
 {
-    public function register($category)
+    /**
+     * Register
+     *
+     * @param $category
+     *
+     * @return void
+     */
+    public function register($category) : void
     {
         add_filter('block_categories', function ($categories, $post) use ($category) {
             $categories = array_merge($categories, [[
