@@ -2,20 +2,9 @@
 
 namespace TinyPixel\Copernicus\Bootstrap;
 
-use Illuminate\Contracts\Foundation\Application;
+use Roots\Acorn\Bootstrap\LoadBindings as RootsLoadBindings;
 
-class LoadBindings
+class LoadBindings extends RootsLoadBindings
 {
-    /**
-     * Bootstrap the given application.
-     *
-     * @param  \TinyPixel\Copernicus\Application  $app
-     * @return void
-     */
-    public function bootstrap(Application $app)
-    {
-        if (class_uses($app, TinyPixel\Copernicus\Concerns\Bindings::class)) {
-            $app->registerContainerBindings();
-        }
-    }
+    // --
 }

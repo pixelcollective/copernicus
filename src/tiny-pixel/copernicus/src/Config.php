@@ -2,9 +2,9 @@
 
 namespace TinyPixel\Copernicus;
 
-use Illuminate\Config\Repository as ConfigBase;
+use Roots\Acorn\Config as RootsConfig;
 
-class Config extends ConfigBase
+class Config extends RootsConfig
 {
     // this class is intentionally blank
 }

@@ -52,7 +52,7 @@ class Registry extends BlockRegistry
          * $this->add(['my-block', 'demo']);
          */
 
-        $this->blocks->add('my-block')->withView('my-block');
+        $this->blocks->add('demo')->withView('demo');
     }
 
     /**

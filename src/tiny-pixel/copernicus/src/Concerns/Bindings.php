@@ -2,10 +2,10 @@
 
 namespace TinyPixel\Copernicus\Concerns;
 
-use Illuminate\Config\Repository as ConfigRepository;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Composer;
+use Illuminate\Config\Repository as ConfigRepository;
+use Illuminate\Contracts\Foundation\Application;
 use Zend\Diactoros\Response as PsrResponse;
 
 trait Bindings

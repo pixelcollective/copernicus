@@ -2,12 +2,9 @@
 
 namespace TinyPixel\Copernicus\Filesystem;
 
-class FilesystemServiceProvider extends \Illuminate\Filesystem\FilesystemServiceProvider
+use Roots\Acorn\Filesystem\FilesystemServiceProvider as RootsFilesystemServiceProvider;
+
+class FilesystemServiceProvider extends RootsFilesystemServiceProvider
 {
-    protected function registerNativeFilesystem()
-    {
-        $this->app->singleton('files', function () {
-            return new Filesystem();
-        });
-    }
+    // --
 }

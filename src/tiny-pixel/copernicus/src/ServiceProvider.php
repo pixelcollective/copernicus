@@ -2,9 +2,9 @@
 
 namespace TinyPixel\Copernicus;
 
-use Illuminate\Support\ServiceProvider as ServiceProviderBase;
+use Roots\Acorn\ServiceProvider as RootsServiceProvider;
 
-abstract class ServiceProvider extends ServiceProviderBase
+abstract class ServiceProvider extends RootsServiceProvider
 {
     // this class is intentionally blank
 }

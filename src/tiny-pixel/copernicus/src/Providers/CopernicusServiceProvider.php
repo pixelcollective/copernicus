@@ -2,13 +2,13 @@
 
 namespace TinyPixel\Copernicus\Providers;
 
+use Copernicus\App\Registry;
 use Illuminate\Support\Collection;
 use TinyPixel\Copernicus\Blocks\Block;
 use TinyPixel\Copernicus\Blocks\BlockAsset;
 use TinyPixel\Copernicus\Blocks\BlockManager;
 use TinyPixel\Copernicus\Blocks\BlockAssetManager;
 use TinyPixel\Copernicus\Blocks\BlockCategoryManager;
-use Copernicus\App\Registry;
 use TinyPixel\Copernicus\ServiceProvider;
 
 /**

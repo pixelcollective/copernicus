@@ -19,19 +19,13 @@ class BlockMakeCommand extends GeneratorCommand
      * @var string
      */
     protected $description = 'Create a new Block';
+
     /**
      * The type of class being generated.
      *
      * @var string
      */
     protected $type = 'Block';
-
-    /**
-     * List of views served by the composer
-     *
-     * @var array
-     */
-    protected $views = [];
 
     /**
      * Get the stub file for the generator.
@@ -78,6 +72,7 @@ class BlockMakeCommand extends GeneratorCommand
     protected function replaceViews($stub, $views)
     {
         $views = implode("',\n        '", $views);
+
         return str_replace('DummyViews', empty($views) ? '//' : "'{$views}'", $stub);
     }
 }

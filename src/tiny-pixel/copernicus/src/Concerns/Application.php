@@ -2,10 +2,10 @@
 
 namespace TinyPixel\Copernicus\Concerns;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 /**
  * Required methods to satisfy Laravel Application contract
@@ -81,6 +81,7 @@ trait Application
     public function path($path = '')
     {
         $appPath = $this->appPath ?: $this->basePath . DIRECTORY_SEPARATOR . 'app';
+
         return $appPath . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
@@ -97,6 +98,7 @@ trait Application
     public function useAppPath($path)
     {
         $this->appPath = $path;
+
         return $this;
     }
 

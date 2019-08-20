@@ -3,12 +3,10 @@
 namespace TinyPixel\Copernicus\Exceptions;
 
 use Exception;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Symfony\Component\Debug\Exception\FlattenException;
-use Symfony\Component\Console\Application as ConsoleApplication;
-use Symfony\Component\Debug\ExceptionHandler as SymfonyExceptionHandler;
+use Symfony\Component\Console\Output\OutputInterface;
+use Roots\Acorn\Exceptions\Handler as RootsHandler;
 
-class Handler implements ExceptionHandler
+class Handler extends RootsHandler
 {
     /**
      * A list of the exception types that should not be reported.
@@ -57,28 +55,6 @@ class Handler implements ExceptionHandler
     }
 
     /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
-     * @return \Illuminate\Http\Response
-     */
-    public function render($request, Exception $e)
-    {
-        $fe = FlattenException::create($e);
-
-        $handler = new SymfonyExceptionHandler(env('APP_DEBUG', false));
-
-        $decorated = $this->decorate($handler->getContent($fe), $handler->getStylesheet($fe));
-
-        $response = new Response($decorated, $fe->getStatusCode(), $fe->getHeaders());
-
-        $response->exception = $e;
-
-        return $response;
-    }
-
-    /**
      * Get the html response content.
      *
      * @param  string  $content
@@ -108,17 +84,5 @@ class Handler implements ExceptionHandler
 </html>
 EOF;
         // phpcs:enable
-    }
-
-    /**
-     * Render an exception to the console.
-     *
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
-     * @param  \Exception  $e
-     * @return void
-     */
-    public function renderForConsole($output, Exception $e)
-    {
-        (new ConsoleApplication())->renderException($e, $output);
     }
 }

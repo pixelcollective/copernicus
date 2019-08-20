@@ -2,19 +2,9 @@
 
 namespace TinyPixel\Copernicus\Console\Scheduling;
 
-use Illuminate\Console\Scheduling\Schedule as ScheduleBase;
-use Illuminate\Contracts\Cache\Repository as Cache;
+use Roots\Acorn\Console\Scheduling\Schedule as RootsSchedule;
 
-class Schedule extends ScheduleBase
+class Schedule extends RootsSchedule
 {
-    /**
-     * Create a new event instance.
-     *
-     * @param  \Illuminate\Contracts\Cache\Repository $cache
-     * @return void
-     */
-    public function __construct(Cache $cache)
-    {
-        $this->cache = $cache;
-    }
+    // --
 }

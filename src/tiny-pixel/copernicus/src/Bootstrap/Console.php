@@ -2,19 +2,30 @@
 
 namespace TinyPixel\Copernicus\Bootstrap;
 
-use TinyPixel\Copernicus\Copernicus as Application;
-use TinyPixel\Copernicus\Console\Kernel;
+use WP_CLI;
+
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use TinyPixel\Copernicus\Exceptions\Handler;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
-
-use WP_CLI;
+use TinyPixel\Copernicus\Exceptions\Handler;
+use TinyPixel\Copernicus\Console\Kernel;
 
 class Console
 {
+    /**
+     * Container instance.
+     *
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
     protected $app;
 
+    /**
+     * Bootstrap console.
+     *
+     * @param  Illuminate\Contracts\Foundation\Application $app
+     * @return void
+     */
     public function bootstrap(Application $app)
     {
         $this->app = $app;
@@ -29,8 +40,8 @@ class Console
                 }
 
                 $this->app->singleton(
-                    \Illuminate\Contracts\Debug\ExceptionHandler::class,
-                    \TinyPixel\Copernicus\Exceptions\Handler::class
+                    ExceptionHandler::class,
+                    Handler::class
                 );
 
                 $kernel = $this->app->make(Kernel::class);

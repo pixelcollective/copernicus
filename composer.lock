@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c2b33852ac9263df2f54ee78a2a2f85",
+    "content-hash": "76654fd65a24bdc0495b7a8c6e6510c8",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -307,6 +307,66 @@
             "time": "2019-07-30T13:57:21+00:00"
         },
         {
+            "name": "illuminate/database",
+            "version": "v5.8.32",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/database.git",
+                "reference": "bca118a78df06922a53b74a083c81b61353fe0a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/bca118a78df06922a53b74a083c81b61353fe0a7",
+                "reference": "bca118a78df06922a53b74a083c81b61353fe0a7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/container": "5.8.*",
+                "illuminate/contracts": "5.8.*",
+                "illuminate/support": "5.8.*",
+                "php": "^7.1.3"
+            },
+            "suggest": {
+                "doctrine/dbal": "Required to rename columns and drop SQLite columns (^2.6).",
+                "fzaninotto/faker": "Required to use the eloquent factory builder (^1.4).",
+                "illuminate/console": "Required to use the database commands (5.8.*).",
+                "illuminate/events": "Required to use the observers with Eloquent (5.8.*).",
+                "illuminate/filesystem": "Required to use the migrations (5.8.*).",
+                "illuminate/pagination": "Required to paginate the result set (5.8.*)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Database\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Database package.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "database",
+                "laravel",
+                "orm",
+                "sql"
+            ],
+            "time": "2019-08-07T12:51:08+00:00"
+        },
+        {
             "name": "illuminate/events",
             "version": "v5.8.32",
             "source": {
@@ -402,6 +462,51 @@
             "description": "The Illuminate Filesystem package.",
             "homepage": "https://laravel.com",
             "time": "2019-06-25T09:00:38+00:00"
+        },
+        {
+            "name": "illuminate/log",
+            "version": "v5.8.32",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/log.git",
+                "reference": "e3b8b413ccdcfb923ba334a6064d8040209a062b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/log/zipball/e3b8b413ccdcfb923ba334a6064d8040209a062b",
+                "reference": "e3b8b413ccdcfb923ba334a6064d8040209a062b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.8.*",
+                "illuminate/support": "5.8.*",
+                "monolog/monolog": "^1.11",
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Log package.",
+            "homepage": "https://laravel.com",
+            "time": "2019-05-15T13:35:51+00:00"
         },
         {
             "name": "illuminate/support",
@@ -596,6 +701,84 @@
                 "storage"
             ],
             "time": "2019-06-18T20:09:29+00:00"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "1.24.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
+                "doctrine/couchdb": "~1.0@dev",
+                "graylog2/gelf-php": "~1.0",
+                "jakub-onderka/php-parallel-lint": "0.9",
+                "php-amqplib/php-amqplib": "~2.4",
+                "php-console/php-console": "^3.1.3",
+                "phpunit/phpunit": "~4.5",
+                "phpunit/phpunit-mock-objects": "2.3.0",
+                "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^0.13",
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+                "php-console/php-console": "Allow sending log messages to Google Chrome",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2018-11-05T09:00:11+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -807,6 +990,71 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "roots/acorn",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/roots/acorn.git",
+                "reference": "cff06a713a22b3ac66369b56587b6265b10ea6f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/roots/acorn/zipball/cff06a713a22b3ac66369b56587b6265b10ea6f0",
+                "reference": "cff06a713a22b3ac66369b56587b6265b10ea6f0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "^5.8",
+                "illuminate/config": "^5.8",
+                "illuminate/console": "^5.8",
+                "illuminate/container": "^5.8",
+                "illuminate/contracts": "^5.8",
+                "illuminate/database": "^5.8",
+                "illuminate/events": "^5.8",
+                "illuminate/filesystem": "^5.8",
+                "illuminate/log": "^5.8",
+                "illuminate/support": "^5.8",
+                "illuminate/view": "^5.8",
+                "league/flysystem": "^1.0",
+                "php": "^7.1.3",
+                "roots/support": "dev-master",
+                "symfony/var-dumper": "^4.3"
+            },
+            "require-dev": {
+                "filp/whoops": "^2.5",
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^7.5|^8.0",
+                "roave/security-advisories": "dev-master",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Roots\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "QWp6t",
+                    "email": "hi@qwp6t.me"
+                }
+            ],
+            "description": "Lazy-loaded framework for Roots WordPress projects",
+            "homepage": "https://roots.io/acorn/",
+            "keywords": [
+                "sage",
+                "wordpress"
+            ],
+            "time": "2019-08-11T04:50:58+00:00"
         },
         {
             "name": "roots/support",
@@ -1521,6 +1769,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "roots/acorn": 20,
         "roots/support": 20
     },
     "prefer-stable": true,

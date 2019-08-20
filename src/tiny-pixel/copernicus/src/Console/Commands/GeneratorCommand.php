@@ -57,9 +57,7 @@ abstract class GeneratorCommand extends Command
         // First we will check to see if the class already exists. If it does, we don't want
         // to create the class and overwrite the user's code. So, we will bail out so the
         // code is untouched. Otherwise, we will continue generating this class' files.
-        if ((! $this->hasOption('force') ||
-             ! $this->option('force')) &&
-             $this->alreadyExists($this->getNameInput())) {
+        if ((! $this->hasOption('force') || ! $this->option('force')) && $this->alreadyExists($this->getNameInput())) {
             $this->error($this->type . ' already exists!');
 
             return false;
@@ -252,8 +250,6 @@ abstract class GeneratorCommand extends Command
      */
     protected function getArguments()
     {
-        return [
-            ['name', InputArgument::REQUIRED, 'The name of the class'],
-        ];
+        return [['name', InputArgument::REQUIRED, 'The name of the class']];
     }
 }

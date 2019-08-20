@@ -2,18 +2,9 @@
 
 namespace TinyPixel\Copernicus\Bootstrap;
 
-use Illuminate\Contracts\Foundation\Application;
+use Roots\Acorn\Bootstrap\RegisterProviders as RootsRegisterProviders;
 
-class RegisterProviders
+class RegisterProviders extends RootsRegisterProviders
 {
-    /**
-     * Bootstrap the given application.
-     *
-     * @param  \Roots\Acorn\Application  $app
-     * @return void
-     */
-    public function bootstrap(Application $app)
-    {
-        $app->registerConfiguredProviders();
-    }
+    // --
 }

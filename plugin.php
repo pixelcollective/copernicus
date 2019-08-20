@@ -19,8 +19,8 @@ use TinyPixel\Copernicus\Copernicus;
 use TinyPixel\Copernicus\Bootloader;
 
 (new class {
-    public function __invoke(array $hooks, string $basePath)
+    public function __invoke(string $basePath)
     {
-        (new Bootloader($hooks, Copernicus::class, $basePath))();
+        (new Bootloader(Copernicus::class, $basePath))();
     }
-})(['after_setup_theme', 'rest_api_init'], __DIR__);
+})(__DIR__);
