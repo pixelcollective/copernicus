@@ -2,10 +2,10 @@
 
 namespace TinyPixel\Copernicus\Console;
 
-use Exception;
-use Throwable;
-use RuntimeException;
-use ReflectionClass;
+use \Exception;
+use \Throwable;
+use \RuntimeException;
+use \ReflectionClass;
 use Roots\Acorn\Console\Kernel as RootsKernel;
 
 class Kernel extends RootsKernel

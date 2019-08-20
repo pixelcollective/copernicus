@@ -2,8 +2,9 @@
 
 namespace TinyPixel\Copernicus\Blocks;
 
-use TinyPixel\Copernicus\Blocks\Asset;
-use TinyPixel\Copernicus\Copernicus as Application;
+use Illuminate\Support\Collection;
+use TinyPixel\Copernicus\Blocks\BlockAsset;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Block Asset Manager
@@ -12,16 +13,36 @@ use TinyPixel\Copernicus\Copernicus as Application;
 class BlockAssetManager
 {
     /**
+     * Assets
+     * @var Illuminate\Support\Collection
+     */
+    protected $assets;
+
+    /**
+     * Distributables Url.
+     * @var string
+     */
+    protected $distUrl;
+
+    /**
+     * Distributables path.
+     * @var string
+     */
+    protected $distPath;
+
+    /**
      * Constructor.
      *
-     * @param TinyPixel\Copernicus\Copernicus
+     * @param Illuminate\Contracts\Foundation\Application $app
      */
     public function __construct(Application $app)
     {
         $this->app = $app;
 
-        $this->baseUrl  = $this->app['config']->get('filesystems.disks.local.url') . '/dist/';
-        $this->basePath = $this->app['config']->get('filesystems.disks.local.root');
+        $this->distUrl  = $this->app['config']->get('filesystems.disks.local.url') . '/dist/';
+        $this->distPath = $this->app['config']->get('filesystems.disks.local.root');
+
+        $this->assets = Collection::make();
 
         return $this;
     }
@@ -30,15 +51,17 @@ class BlockAssetManager
      * Add asset.
      *
      * @param  string $assetName
-     * @return TinyPixel\Copernicus\Blocks\Asset
+     * @return TinyPixel\Copernicus\Blocks\BlockAsset
      */
-    public function add($assetName) : BlockAsset
+    public function add(string $assetName) : BlockAsset
     {
         $this->{$assetName} = $this->app->make('block.asset');
 
         $this->{$assetName}
-             ->setBase($this->baseUrl, $this->basePath)
-             ->label($assetName);
+             ->setDist($this->distUrl, $this->distPath)
+             ->setLabel($assetName);
+
+        $this->assets->push($this->{$assetName});
 
         return $this->{$assetName};
     }

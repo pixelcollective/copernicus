@@ -2,6 +2,9 @@
 
 namespace TinyPixel\Copernicus\Blocks;
 
+use function \add_action;
+use function \wp_enqueue_script;
+use function \wp_enqueue_style;
 use Illuminate\Support\Collection;
 use TinyPixel\Copernicus\Copernicus as Application;
 
@@ -12,67 +15,96 @@ use TinyPixel\Copernicus\Copernicus as Application;
 class BlockAsset
 {
     /**
-     * Loads alongside
+     * Asset label.
      * @var string
      */
-    protected $loadsAlongside;
+    protected $label;
 
     /**
-     * Editor dependencies
-     *
-     * @var Illuminate\Support\Collection
+     * Distributables base URL.
+     * @var string
      */
-    protected $editorDependencies;
+    protected $distUrl;
 
     /**
-     * Dependencies
-     *
-     * @var Illuminate\Support\Collection
+     * Distributables base path.
+     * @var string
+     */
+    protected $distPath;
+
+    /**
+     * Asset filename.
+     * @var string
+     */
+    protected $fileName;
+
+    /**
+     * Paired block (conditionally load asset when block is used)
+     * @var string
+     */
+    protected $pairedBlock;
+
+    /**
+     * Associated block namespace.
+     * @var string
+     */
+    protected $namespace;
+
+    /**
+     * Asset dependencies.
+     * @var \Illuminate\Support\Collection
      */
     protected $dependencies;
 
     /**
-     * Construct.
+     * WordPress action utilized to enqueue asset.
+     * @var string
+     */
+    protected $enqueueAction;
+
+    /**
+     * Actions lookup table.
+     * @var array
+     */
+    protected $actions = [
+        'public' => 'wp_enqueue_scripts',
+        'editor' => 'enqueue_block_editor_assets',
+        'admin'  => 'admin_enqueue_scripts',
+    ];
+
+    /**
+     * General editor dependencies
+     * @var \Illuminate\Support\Collection
+     */
+    protected $editorDependencies = [
+        'wp-editor',
+        'wp-element',
+        'wp-blocks',
+    ];
+
+    /**
+     * Constructor.
      *
-     * @param  TinyPixel\Copernicus\Copernicus $app
+     * @param TinyPixel\Copernicus\Copernicus $app
      */
     public function __construct(Application $app)
     {
-        $this->editorDependencies = Collection::make([
-            'wp-editor',
-            'wp-element',
-            'wp-blocks',
-        ]);
+        $this->app                = $app;
+        $this->namespace          = $app['config']->get('blocks.namespace');
 
-        $this->dependsOn = Collection::make();
-
-        $this->namespace = $app['config']->get('blocks.namespace');
+        $this->editorDependencies = Collection::make($this->editorDependencies);
+        $this->dependencies       = Collection::make();
 
         return $this;
     }
 
     /**
-     * Set base URL and directory
-     *
-     * @param  string $url
-     * @param  string $path
-     * @return TinyPixel\Copernicus\Blocks\BlockAsset
-     */
-    public function setBase(string $url, string $path) : BlockAsset
-    {
-        $this->baseUrl = $url;
-        $this->basePath = $path . 'dist';
-
-        return $this;
-    }
-
-    /**
-     * Label asset
+     * Setter: Asset label.
      *
      * @param  string $assetLabel
      * @return TinyPixel\Copernicus\Blocks\BlockAsset
      */
-    public function label(string $assetLabel) : BlockAsset
+    public function setLabel(string $assetLabel) : BlockAsset
     {
         $this->label = $assetLabel;
 
@@ -80,20 +112,33 @@ class BlockAsset
     }
 
     /**
-     * Pair asset with a block for conditionally loading.
+     * Setter: Conditionally load asset with specified block.
      *
      * @param  string $blockName
      * @return TinyPixel\Copernicus\Blocks\BlockAsset
      */
-    public function loadsAlongside(string $blockName) : BlockAsset
+    public function pairWith(string $blockName) : BlockAsset
     {
-        $this->loadsAlongside = $blockName;
+        $this->pairedBlock = $blockName;
 
         return $this;
     }
 
     /**
-     * Set asset dependencies
+     * Setter: Action to enqueue with.
+     *
+     * @param  string $action key
+     * @return TinyPixel\Copernicus\Blocks\BlockAsset
+     */
+    public function loadWith(string $action) : BlockAsset
+    {
+        $this->enqueueAction = $action;
+
+        return $this;
+    }
+
+    /**
+     * Setter: Asset dependencies.
      *
      * @param  array $dependencies
      * @return TinyPixel\Copernicus\Blocks\BlockAsset
@@ -101,166 +146,250 @@ class BlockAsset
     public function dependsOn(array $dependencies) : BlockAsset
     {
         Collection::make($dependencies)->each(function ($dependency) {
-            $this->dependsOn->push($dependency);
+            $this->dependencies->push($dependency);
         });
 
         return $this;
     }
 
     /**
-     * Add editor styles.
+     * Setter: Distributables URL and path.
      *
-     * @param string $file
-     * @param array  $dependencies
+     * @param  string $url
+     * @param  string $path
+     * @return TinyPixel\Copernicus\Blocks\BlockAsset
+     */
+    public function setDist(string $url, string $path) : BlockAsset
+    {
+        $this->distUrl = $url;
+        $this->distPath = $path . 'dist';
+
+        return $this;
+    }
+
+    /**
+     * Handles style asset registration.
+     *
+     * @param string $fileName
      *
      * @return TinyPixel\Copernicus\Blocks\BlockAsset
      */
-    public function editorStyle(string $file) : BlockAsset
+    public function style(string $fileName)
     {
-        add_action('enqueue_block_editor_assets', function () use ($file) {
-            if (file_exists($this->getPath($file))) {
-                wp_enqueue_style(
-                    $this->label,
-                    $this->getUrl($file),
-                    $this->dependencies(),
-                    'all'
-                );
-            }
-        });
+        /**
+         * Bail if requested file isn't available.
+         */
+        if (! $this->assetExists($this->fileName = $fileName)) {
+            return;
+        }
+
+        /**
+         * Enqueue stylesheet.
+         */
+        add_action($this->action(), [$this, 'enqueueStyle']);
 
         return $this;
     }
 
     /**
-     * Add editor scripts.
+     * Handles script asset registration.
      *
-     * @param string $file
-     * @return TinyPixel\Copernicus\Blocks\BlockAsset
+     * @param  string $fileName
+     * @return {void|TinyPixel\Copernicus\Blocks\BlockAsset}
+     * @uses   \add_action
      */
-    public function editorScript(string $file) : BlockAsset
+    public function script(string $fileName)
     {
-        add_action('enqueue_block_editor_assets', function () use ($file) {
-            if (file_exists($this->getPath($file))) {
-                wp_enqueue_script(
-                    $this->label,
-                    $this->getUrl($file),
-                    $this->editorDependencies(),
-                    null,
-                    true
-                );
-            }
-        });
+        /**
+         * Bail if requested file isn't available.
+         */
+        if (! $this->assetExists($this->fileName = $fileName)) {
+            return;
+        }
+
+        /**
+         * Bail if block is set to load conditionally and is
+         * not utilized on page.
+         */
+        if ($this->assetShouldBeEnqueued()) {
+            return;
+        }
+
+        /**
+         * Enqueue script.
+         */
+        \add_action($this->actions[$this->enqueueAction], [$this, 'enqueueScript']);
 
         return $this;
     }
 
     /**
-     * Add public stylesheet.
+     * Enqueues JavaScript asset.
      *
-     * @param string $file
-     * @return TinyPixel\Copernicus\Blocks\BlockAsset
+     * @return void
+     * @uses   \wp_enqueue_script
      */
-    public function style(string $file) : BlockAsset
+    public function enqueueScript() : void
     {
-        add_action('wp_enqueue_scripts', function () use ($file) {
-            if (file_exists($this->getPath($file))) {
-                return (isset($this->loadsAlongside) && !has_block(
-                    $this->qualify($this->loadsAlongside)
-                )) ? null : wp_enqueue_style(
-                    $this->label,
-                    $this->getUrl($file),
-                    $this->dependencies(),
-                    'all'
-                );
-            }
-        });
-
-        return $this;
+        \wp_enqueue_script(
+            $this->label(),
+            $this->url(),
+            $this->dependencies(),
+            null,
+            true
+        );
     }
 
     /**
-     * Add public script.
+     * Enqueues CSS asset.
      *
-     * @param string $file
-     * @return TinyPixel\Copernicus\Blocks\BlockAsset
+     * @return void
+     * @uses   \wp_enqueue_style
      */
-    public function script(string $file) : BlockAsset
+    public function enqueueStyle() : void
     {
-        add_action('wp_enqueue_scripts', function () use ($file) {
-            if (file_exists($this->getPath($file))) {
-                return (isset($this->loadsAlongside) && !has_block(
-                    $this->qualify($this->loadsAlongside)
-                )) ? null : wp_enqueue_script(
-                    $this->label,
-                    $this->getUrl($file),
-                    $this->dependencies(),
-                    null,
-                    true
-                );
-            }
-        });
-
-        return $this;
+        \wp_enqueue_style(
+            $this->label(),
+            $this->url(),
+            $this->dependencies(),
+            'all'
+        );
     }
 
     /**
-     * Returns blockname qualified with namespace.
+     * Returns a boolean representing whether a public asset
+     * should be enqueued.
      *
-     * @param  string $blockName
-     * @return string
+     * @return bool
      */
-    public function qualify(string $blockName) {
-        return "{$this->namespace}/{$blockName}";
-    }
-
-    /**
-     * URL of asset
-     *
-     * @param  string $file
-     * @return string
-     */
-    public function getUrl(string $file) : string
+    protected function assetShouldBeEnqueued() : bool
     {
-        return "{$this->baseUrl}{$file}";
+        return isset($this->pairedBlock) && ! has_block(
+            $this->qualifiedName($this->pairedBlock, $this->namespace())
+        );
     }
 
     /**
-     * Path to asset.
+     * Returns a boolean representing whether an asset file
+     * is locatable.
      *
-     * @param  string $file
-     * @return string
+     * @param  string $filename
+     * @return bool
      */
-    public function getPath(string $file) : string
+    protected function assetExists(string $fileName) : bool
     {
-        return "{$this->basePath}/{$file}";
+        return file_exists($this->path($fileName));
+    }
+
+   /**
+     * Determine if block is bound to the editor and return
+     * appropriate dependencies.
+     *
+     * @param  string $action
+     * @return array
+     */
+    protected function dependencies() : array
+    {
+        if ($this->enqueueAction=='public') {
+            return $this->publicDependencies();
+        }
+
+        if ($this->enqueueAction=='editor') {
+            return $this->editorDependencies();
+        }
     }
 
     /**
-     * Dependencies
+     * Returns specified dependencies.
      *
      * @return array
      */
-    public function dependencies() : array
+    protected function publicDependencies() : array
     {
-        return !$this->dependsOn->isEmpty() ?
-            $this->dependsOn->toArray() :
+        return ! $this->dependencies->isEmpty() ?
+            $this->dependencies->toArray() :
             [];
     }
 
     /**
-     * Get editor dependencies
+     * Returns specified dependencies along with
+     * baseline editor dependencies.
      *
-     * @param  string $file
+     * @param  string $fileName
      * @return array
      */
-    public function editorDependencies() : array
+    protected function editorDependencies() : array
     {
-        if(!$this->dependsOn->isEmpty()) {
-            $this->dependsOn->each(function ($dependency) {
+        if(! $this->dependencies->isEmpty()) {
+            $this->dependencies->each(function ($dependency) {
                 $this->editorDependencies->push($dependency);
             });
         }
 
-        return $this->editorDependencies->toArray();
+        return ! $this->editorDependencies->isEmpty() ?
+            $this->editorDependencies->toArray() :
+            [];
+    }
+
+    /**
+     * Returns path to file.
+     *
+     * @return string
+     */
+    protected function path($fileName) : string
+    {
+        return "{$this->distPath}/{$fileName}";
+    }
+
+    /**
+     * Returns full blockname, including namespace.
+     *
+     * @param  string $blockName
+     * @param  string $namespace
+     * @return string
+     */
+    protected function qualifiedName(string $blockName, string $namespace) : string
+    {
+        return "{$this->namespace}/{$blockName}";
+    }
+
+    /**
+     * Return WordPress action from short name (key).
+     *
+     * @return string
+     */
+    protected function action() : string
+    {
+        return $this->actions[$this->enqueueAction];
+    }
+
+    /**
+     * Getter: Asset label.
+     *
+     * @return string
+     */
+    protected function label() : string
+    {
+        return $this->label;
+    }
+
+    /**
+     * Getter: Asset URL.
+     *
+     * @return string
+     */
+    protected function url() : string
+    {
+        return "{$this->distUrl}{$this->fileName}";
+    }
+
+    /**
+     * Getter: namespace.
+     *
+     * @return string
+     */
+    protected function namespace() : string
+    {
+        return $this->namespace;
     }
 }

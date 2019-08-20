@@ -4,9 +4,23 @@ namespace TinyPixel\Copernicus\Concerns;
 
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Composer;
+use Illuminate\Events\EventServiceProvider;
+use Illuminate\Cache\CacheServiceProvider;
+use Illuminate\View\ViewServiceProvider;
 use Illuminate\Config\Repository as ConfigRepository;
+use Illuminate\Contracts\Cache\Factory as CacheFactory;
+use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
+use Illuminate\Filesystem\Filesystem as IlluminateFilesystem;
+use Illuminate\Contracts\Filesystem\Factory as FilesystemFactory;
+use Illuminate\Contracts\Filesystem\Cloud as FilesystemCloud;
+use Illuminate\Contracts\Filesystem\Filesystem as FilesystemContract;
+use Illuminate\Contracts\Console\Kernel as IlluminateKernel;
+use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\Foundation\Application;
-use Zend\Diactoros\Response as PsrResponse;
+use TinyPixel\Copernicus\Console\Kernel as CopernicusKernel;
+use TinyPixel\Copernicus\Filesystem\Filesystem as CopernicusFilesystem;
+use TinyPixel\Copernicus\Filesystem\FilesystemServiceProvider as CopernicusFilesystemServiceProvider;
 
 trait Bindings
 {
@@ -25,13 +39,13 @@ trait Bindings
     {
         // phpcs:disable
         foreach([
-            'registerCacheBindings' => ['cache', 'cache.store', \Illuminate\Contracts\Cache\Factory::class, \Illuminate\Contracts\Cache\Repository::class],
+            'registerCacheBindings' => ['cache', 'cache.store', CacheFactory::class, CacheRepository::class],
             'registerConfigBindings' => ['config'],
-            'registerConsoleBindings' => ['artisan', 'console', \Acorn\Console\Kernel::class, \Illuminate\Contracts\Console\Kernel::class],
-            'registerEventBindings' => ['events', \Illuminate\Contracts\Events\Dispatcher::class],
-            'registerFilesBindings' => ['files', \TinyPixel\Copernicus\Filesystem\Filesystem::class, \Illuminate\Filesystem\Filesystem::class],
-            'registerFilesystemBindings' => ['filesystem', 'filesystem.cloud', 'filesystem.disk', \Illuminate\Contracts\Filesystem\Factory::class, \Illuminate\Contracts\Filesystem\Cloud::class, \Illuminate\Contracts\Filesystem\Filesystem::class],
-            'registerViewBindings' => ['view', \Illuminate\Contracts\View\Factory::class],
+            'registerConsoleBindings' => ['artisan', 'console', CopernicusKernel::class, IlluminateKernel::class],
+            'registerEventBindings' => ['events', EventDispatcher::class],
+            'registerFilesBindings' => ['files', CopernicusFilesystem::class, IlluminateFilesystem::class],
+            'registerFilesystemBindings' => ['filesystem', 'filesystem.cloud', 'filesystem.disk', FilesystemFactory::class, FilesystemCloud::class, FilesystemContract::class],
+            'registerViewBindings' => ['view', ViewFactory::class],
         ] as $method => $abstracts) {
             foreach($abstracts as $abstract) {
                 $this->availableBindings[$abstract] = $method;
@@ -64,11 +78,11 @@ trait Bindings
     protected function registerCacheBindings()
     {
         $this->singleton('cache', function () {
-            return $this->loadComponent('cache', \Illuminate\Cache\CacheServiceProvider::class);
+            return $this->loadComponent('cache', CacheServiceProvider::class);
         });
 
         $this->singleton('cache.store', function () {
-            return $this->loadComponent('cache', \Illuminate\Cache\CacheServiceProvider::class, 'cache.store');
+            return $this->loadComponent('cache', CacheServiceProvider::class, 'cache.store');
         });
     }
 
@@ -91,7 +105,7 @@ trait Bindings
      */
     protected function registerConsoleBindings()
     {
-        $this->singleton('console', \TinyPixel\Copernicus\Console\Kernel::class);
+        $this->singleton('console', CopernicusKernel::class);
     }
 
     /**
@@ -102,7 +116,8 @@ trait Bindings
     protected function registerEventBindings()
     {
         $this->singleton('events', function () {
-            $this->register(\Illuminate\Events\EventServiceProvider::class);
+            $this->register(EventServiceProvider::class);
+
             return $this->make('events');
         });
     }
@@ -116,7 +131,7 @@ trait Bindings
     protected function registerFilesBindings()
     {
         $this->singleton('files', function () {
-            return new \TinyPixel\Copernicus\Filesystem\Filesystem();
+            return new CopernicusFilesystem();
         });
     }
 
@@ -130,7 +145,7 @@ trait Bindings
         $this->singleton('filesystem', function () {
             return $this->loadComponent(
                 'filesystems',
-                \TinyPixel\Copernicus\Filesystem\FilesystemServiceProvider::class,
+                CopernicusFilesystemServiceProvider::class,
                 'filesystem'
             );
         });
@@ -138,7 +153,7 @@ trait Bindings
         $this->singleton('filesystem.disk', function () {
             return $this->loadComponent(
                 'filesystems',
-                \TinyPixel\Copernicus\Filesystem\FilesystemServiceProvider::class,
+                CopernicusFilesystemServiceProvider::class,
                 'filesystem.disk'
             );
         });
@@ -146,7 +161,7 @@ trait Bindings
         $this->singleton('filesystem.cloud', function () {
             return $this->loadComponent(
                 'filesystems',
-                \TinyPixel\Copernicus\Filesystem\FilesystemServiceProvider::class,
+                CopernicusFilesystemServiceProvider::class,
                 'filesystem.cloud'
             );
         });
@@ -160,7 +175,7 @@ trait Bindings
     protected function registerViewBindings()
     {
         $this->singleton('view', function () {
-            return $this->loadComponent('view', \Illuminate\View\ViewServiceProvider::class);
+            return $this->loadComponent('view', ViewServiceProvider::class);
         });
     }
 }

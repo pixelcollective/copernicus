@@ -5,11 +5,10 @@ namespace TinyPixel\Copernicus\Blocks;
 use function \add_action;
 use function \add_filter;
 use function \register_block_type;
-
 use Illuminate\Support\Collection;
 use Illuminate\View\Factory as View;
 use TinyPixel\Copernicus\Blocks\Block;
-use TinyPixel\Copernicus\Copernicus as Application;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Block Manager
@@ -34,9 +33,8 @@ class BlockManager
     /**
      * Constructor.
      *
-     * @param TinyPixel\Copernicus\BlockAssetManager $assetManager
-     * @param Illuminate\View\Factory                $view
-     * @param string                                 $namespace
+     * @param Illuminate\Contracts\Foundation\Application $app
+     * @param string $namespace
      */
     public function __construct(Application $app, string $namespace) {
         $this->app       = $app;
@@ -53,8 +51,8 @@ class BlockManager
      * Register block.
      *
      * Accepts a string or array of blocks to register.
-     * Arrays return void.
-     * Strings return the Block for continued manipulation.
+     *  - Arrays return void.
+     *  - Strings return the block object.
      *
      * @param  {array|string} $blocks
      * @return {TinyPixel\Copernicus\Blocks\Block|void}
@@ -122,8 +120,11 @@ class BlockManager
 
     /**
      * Register blocks
+     *
+     * @return void
+     * @uses   \add_action
      */
-    public function register()
+    public function register() : void
     {
         /**
          * Call each block's registration method on init.

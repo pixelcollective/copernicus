@@ -5,9 +5,13 @@ namespace TinyPixel\Copernicus;
 use function \doing_action;
 use function \did_action;
 use function \apply_filters;
-use function Roots\add_filters;
 use function Roots\env;
+use function Roots\add_filters;
 use TinyPixel\Copernicus\Copernicus;
+use TinyPixel\Copernicus\Bootstrap\LoadConfiguration;
+use TinyPixel\Copernicus\Bootstrap\LoadBindings;
+use TinyPixel\Copernicus\Bootstrap\RegisterProviders;
+use TinyPixel\Copernicus\Bootstrap\Console;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 use Roots\Acorn\Bootloader as RootsBootloader;
 
@@ -32,10 +36,10 @@ class Bootloader extends RootsBootloader
      * @var array
      */
     public $bootstrap = [
-        \TinyPixel\Copernicus\Bootstrap\LoadConfiguration::class,
-        \TinyPixel\Copernicus\Bootstrap\LoadBindings::class,
-        \TinyPixel\Copernicus\Bootstrap\RegisterProviders::class,
-        \TinyPixel\Copernicus\Bootstrap\Console::class,
+        LoadConfiguration::class,
+        LoadBindings::class,
+        RegisterProviders::class,
+        Console::class,
     ];
 
     /**
@@ -124,9 +128,6 @@ class Bootloader extends RootsBootloader
      */
     protected function bootstrap() : array
     {
-        return \apply_filters(
-            'copernicus/bootstrap',
-            $this->bootstrap
-        );
+        return \apply_filters('copernicus/bootstrap', $this->bootstrap);
     }
 }

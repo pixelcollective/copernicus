@@ -3,6 +3,7 @@
 namespace TinyPixel\Copernicus\Providers;
 
 use Copernicus\App\Registry;
+
 use Illuminate\Support\Collection;
 use TinyPixel\Copernicus\Blocks\Block;
 use TinyPixel\Copernicus\Blocks\BlockAsset;
@@ -14,7 +15,6 @@ use TinyPixel\Copernicus\ServiceProvider;
 /**
  * Copernicus Service Provider.
  *
- * @extends TinyPixel\Copernicus\ServiceProvider
  */
 class CopernicusServiceProvider extends ServiceProvider
 {
@@ -74,10 +74,13 @@ class CopernicusServiceProvider extends ServiceProvider
     public function boot()
     {
         /**
-         * Run the registry.
+         * Create the registry.
          */
         $blockRegistry = $this->app->make('block.registry');
-        $blockRegistry->init();
-        $blockRegistry->register();
+
+        /**
+         * Run block editor registration.
+         */
+        $blockRegistry->run();
     }
 }

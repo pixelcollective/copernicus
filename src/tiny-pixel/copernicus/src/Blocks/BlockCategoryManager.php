@@ -4,7 +4,6 @@ namespace TinyPixel\Copernicus\Blocks;
 
 use function \add_filter;
 use Illuminate\Support\Collection;
-use TinyPixel\Copernicus\Copernicus as Application;
 
 /**
  * Block category manager
@@ -36,11 +35,7 @@ class BlockCategoryManager
      * @param  string $icon
      * @return void
      */
-    public function add(
-        string $name,
-        string $title,
-        string $icon
-    ) : void {
+    public function add(string $name, string $title, string $icon) : void {
         $this->categories->push([
             'slug'  => $name,
             'title' => $title,
@@ -51,9 +46,9 @@ class BlockCategoryManager
     /**
      * Register categories.
      *
-     * @uses   \add_filter
      * @param  $category
      * @return void
+     * @uses   \add_filter
      */
     public function register() : void
     {

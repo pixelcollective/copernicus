@@ -3,7 +3,6 @@
 namespace TinyPixel\Copernicus;
 
 use Exception;
-use TinyPixel\Copernicus\Filesystem\Filesystem;
 use Roots\Acorn\PackageManifest as RootsPackageManifest;
 
 class PackageManifest extends RootsPackageManifest

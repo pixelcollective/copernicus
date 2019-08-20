@@ -5,6 +5,7 @@ namespace Copernicus\App;
 use TinyPixel\Copernicus\Blocks\BlockRegistry;
 use TinyPixel\Copernicus\Blocks\BlockManager;
 use TinyPixel\Copernicus\Blocks\BlockAssetManager;
+use TinyPixel\Copernicus\Blocks\BlockCategoryManager;
 
 /**
  * Registry
@@ -17,13 +18,25 @@ class Registry extends BlockRegistry
      *
      * @param BlockAssetManager $assets
      */
-    public function assets()
+    public function assets(BlockAssetManager $assets)
     {
-        $this->assets->add('demo.editor.js')
-                ->editorScript('index.js');
+        $assets
+            ->add('demo/editor')
+            ->loadWith('editor')
+            ->script('demo-editor.js');
 
-        $this->assets->add('demo.editor.css')
-                ->editorStyle('demo.css');
+        $assets
+            ->add('demo/editor')
+            ->loadWith('editor')
+            ->style('demo.css');
+
+        $assets
+            ->add('demo/public')
+            ->loadWith('public')
+            ->pairWith('demo')
+            ->script('demo.js');
+
+        return $assets;
     }
 
     /**
@@ -31,7 +44,7 @@ class Registry extends BlockRegistry
      *
      * @return void
      */
-    public function blocks()
+    public function blocks(BlockManager $blocks)
     {
         /**
          * Example: add a block and set its view:
@@ -49,10 +62,12 @@ class Registry extends BlockRegistry
          * Example: if a block name matches a view filename,
          * you may add it as part of a group:
          *
-         * $this->add(['my-block', 'demo']);
+         * $this->addSet(['my-block', 'demo']);
          */
 
-        $this->blocks->add('demo')->withView('demo');
+        $blocks->add('demo')->withView('demo');
+
+        return $blocks;
     }
 
     /**
@@ -60,9 +75,11 @@ class Registry extends BlockRegistry
      *
      * @return void
      */
-    public function categories()
+    public function categories(BlockCategoryManager $categories)
     {
         // params: block slug, block title, block icon
-        $this->categories->add('demo', 'Demo', 'general');
+        $categories->add('demo', 'Demo', 'general');
+
+        return $categories;
     }
 }

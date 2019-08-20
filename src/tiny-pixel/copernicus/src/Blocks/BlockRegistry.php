@@ -2,12 +2,13 @@
 
 namespace TinyPixel\Copernicus\Blocks;
 
-use TinyPixel\Copernicus\Copernicus as Application;
+use function \dd;
+use function \add_action;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
- * Registry
- *
- * Registers blocks, categories and assets.
+ * Block editor registry.
  *
  */
 class BlockRegistry
@@ -15,56 +16,81 @@ class BlockRegistry
     /**
      * Constructor.
      *
-     * @param TinyPixel\Copernicus\Copernicus $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      */
     public function __construct(Application $app)
     {
         $this->app = $app;
 
-        $this->blocks = $this->app->make('block.manager');
-        $this->assets = $this->app->make('block.assetManager');
-        $this->categories = $this->app->make('block.categoryManager');
+        $this->blockManager    = $this->app->make('block.manager');
+        $this->assetManager    = $this->app->make('block.assetManager');
+        $this->categoryManager = $this->app->make('block.categoryManager');
     }
 
     /**
-     * Initialize registry.
+     * Runs registration.
      *
      * @return void
+     * @uses   \add_action
      */
-    public function init() : void
+    public function run() : void
     {
-        /**
-         * Call userland blocks method.
-         */
-        $this->blocks();
-
-        /**
-         * Call userland assets method.
-         */
-        $this->assets();
-
-        /**
-         * Call userland categories method.
-         */
-        $this->categories();
+        $this->processBlocks();
+        $this->processAssets();
+        $this->processCategories();
 
         /**
          * Call debug, if enabled.
          */
         if ($this->app['config']->get('blocks.debug')) {
-            add_action('wp_enqueue_scripts', [$this, 'debug']);
+            \add_action('wp_enqueue_scripts', [$this, 'debug']);
         }
     }
 
     /**
-     * Register blocks and categories
+     * Process blocks.
      *
      * @return void
      */
-    public function register() : void
+    public function processBlocks() : void
     {
+        $this->blocks = $this->blocks($this->blockManager);
+
         $this->blocks->register();
-        $this->categories->register();
+    }
+
+    /**
+     * Process assets.
+     *
+     * @return void
+     */
+    public function processAssets() : void
+    {
+        $this->assets = $this->assets($this->assetManager);
+    }
+
+    /**
+     * Process categories.
+     *
+     * @return void
+     */
+    public function processCategories() : void
+    {
+        $this->categories = $this->categories($this->categoryManager)->register();
+    }
+
+    /**
+     * Convenience method to add blocks with matching
+     * view and block names.
+     *
+     * @param  array $blocks
+     * @return void
+     */
+    public function addSet(array $blocks) : void
+    {
+        foreach($blocks as $block) {
+            $this->blocks->add($block)->withView($block);
+        }
     }
 
     /**
@@ -74,6 +100,7 @@ class BlockRegistry
      *
      * @param  void
      * @return void
+     * @uses   \dd
      */
     public function debug()
     {
@@ -81,18 +108,5 @@ class BlockRegistry
         global $wp_scripts;
 
         dd([$wp_styles, $wp_scripts]);
-    }
-
-    /**
-     * Convenience method to add blocks with matching
-     * view and block names.
-     *
-     * @param  array $blocks
-     */
-    public function add(array $blocks)
-    {
-        foreach($blocks as $block) {
-            $this->blocks->add($block)->withView($block);
-        }
     }
 }
