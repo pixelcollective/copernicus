@@ -5,7 +5,7 @@ namespace TinyPixel\Copernicus;
 use \Exception;
 use Roots\Acorn\ProviderRepository as RootsProviderRepository;
 
-class ProviderRepository
+class ProviderRepository extends RootsProviderRepository
 {
     /**
      * Write the service manifest file to disk.

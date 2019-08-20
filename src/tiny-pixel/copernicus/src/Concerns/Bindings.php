@@ -21,6 +21,7 @@ use Illuminate\Contracts\Foundation\Application;
 use TinyPixel\Copernicus\Console\Kernel as CopernicusKernel;
 use TinyPixel\Copernicus\Filesystem\Filesystem as CopernicusFilesystem;
 use TinyPixel\Copernicus\Filesystem\FilesystemServiceProvider as CopernicusFilesystemServiceProvider;
+use TinyPixel\Copernicus\Plugin\PluginServiceProvider;
 
 trait Bindings
 {
@@ -39,13 +40,14 @@ trait Bindings
     {
         // phpcs:disable
         foreach([
-            'registerCacheBindings' => ['cache', 'cache.store', CacheFactory::class, CacheRepository::class],
-            'registerConfigBindings' => ['config'],
-            'registerConsoleBindings' => ['artisan', 'console', CopernicusKernel::class, IlluminateKernel::class],
-            'registerEventBindings' => ['events', EventDispatcher::class],
-            'registerFilesBindings' => ['files', CopernicusFilesystem::class, IlluminateFilesystem::class],
+            'registerCacheBindings'      => ['cache', 'cache.store', CacheFactory::class, CacheRepository::class],
+            'registerConfigBindings'     => ['config'],
+            'registerConsoleBindings'    => ['artisan', 'console', CopernicusKernel::class, IlluminateKernel::class],
+            'registerEventBindings'      => ['events', EventDispatcher::class],
+            'registerFilesBindings'      => ['files', CopernicusFilesystem::class, IlluminateFilesystem::class],
             'registerFilesystemBindings' => ['filesystem', 'filesystem.cloud', 'filesystem.disk', FilesystemFactory::class, FilesystemCloud::class, FilesystemContract::class],
-            'registerViewBindings' => ['view', ViewFactory::class],
+            'registerViewBindings'       => ['view', ViewFactory::class],
+            'registerPluginBindings'     => ['plugin']
         ] as $method => $abstracts) {
             foreach($abstracts as $abstract) {
                 $this->availableBindings[$abstract] = $method;
@@ -164,6 +166,18 @@ trait Bindings
                 CopernicusFilesystemServiceProvider::class,
                 'filesystem.cloud'
             );
+        });
+    }
+
+    /**
+     * Register container bindings for the application.
+     *
+     * @return void
+     */
+    protected function registerPluginBindings()
+    {
+        $this->singleton('plugin', function () {
+            return new PluginServiceProvider();
         });
     }
 

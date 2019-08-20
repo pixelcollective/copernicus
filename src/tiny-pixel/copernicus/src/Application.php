@@ -56,7 +56,6 @@ class Copernicus extends Application implements ApplicationContract
      */
     public function registerCoreContainerAliases()
     {
-        // phpcs:disable
         $this->alias([
             'app'              => [Copernicus::class, Container::class, ApplicationContract::class, ContainerInterface::class],
             'blade.compiler'   => [BladeCompiler::class],
@@ -71,6 +70,5 @@ class Copernicus extends Application implements ApplicationContract
             'view'             => [ViewFactory::class, ViewContract::class],
             'view.finder'      => [FileViewFinder::class, IlluminateFileViewFinder::class, FileViewFinderContract::class]
         ]);
-        // phpcs:enable
     }
 }

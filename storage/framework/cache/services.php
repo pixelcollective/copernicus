@@ -1,15 +1,17 @@
 <?php return array (
-  'providers' =>
+  'providers' => 
   array (
     0 => 'TinyPixel\\Copernicus\\View\\ViewServiceProvider',
-    1 => 'TinyPixel\\Copernicus\\Providers\\CopernicusServiceProvider',
+    1 => 'TinyPixel\\Copernicus\\Providers\\PluginServiceProvider',
+    2 => 'TinyPixel\\Copernicus\\Providers\\CopernicusServiceProvider',
   ),
-  'eager' =>
+  'eager' => 
   array (
     0 => 'TinyPixel\\Copernicus\\View\\ViewServiceProvider',
-    1 => 'TinyPixel\\Copernicus\\Providers\\CopernicusServiceProvider',
+    1 => 'TinyPixel\\Copernicus\\Providers\\PluginServiceProvider',
+    2 => 'TinyPixel\\Copernicus\\Providers\\CopernicusServiceProvider',
   ),
-  'deferred' =>
+  'deferred' => 
   array (
   ),
 );

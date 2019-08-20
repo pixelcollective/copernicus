@@ -1,6 +1,6 @@
 <?php
 
-namespace Copernicus\App;
+namespace Copernicus\App\Blocks;
 
 use TinyPixel\Copernicus\Blocks\BlockRegistry;
 use TinyPixel\Copernicus\Blocks\BlockManager;

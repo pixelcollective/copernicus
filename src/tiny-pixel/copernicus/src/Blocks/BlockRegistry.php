@@ -10,9 +10,32 @@ use Illuminate\Contracts\Foundation\Application;
 /**
  * Block editor registry.
  *
+ * @author    Kelly Mears <kelly@tinypixel.dev>
+ * @license   MIT
+ * @version   1.0.0
+ * @since     1.0.0
+ * @copyright Tiny Pixel Collective, LLC
  */
 class BlockRegistry
 {
+    /**
+     * Block manager.
+     * @var \TinyPixel\Copernicus\Blocks\BlockManager
+     */
+    protected $blockManager;
+
+    /**
+     * Block manager.
+     * @var \TinyPixel\Copernicus\Blocks\BlockAssetManager
+     */
+    protected $assetManager;
+
+    /**
+     * Block manager.
+     * @var \TinyPixel\Copernicus\Blocks\BlockCategoryManager
+     */
+    protected $categoryManager;
+
     /**
      * Constructor.
      *

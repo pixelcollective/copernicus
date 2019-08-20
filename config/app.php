@@ -56,6 +56,7 @@ return [
 
     'providers' => [
         TinyPixel\Copernicus\View\ViewServiceProvider::class,
+        TinyPixel\Copernicus\Providers\PluginServiceProvider::class,
         TinyPixel\Copernicus\Providers\CopernicusServiceProvider::class,
     ],
 

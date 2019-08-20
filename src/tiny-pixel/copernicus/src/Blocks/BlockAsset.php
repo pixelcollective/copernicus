@@ -6,7 +6,7 @@ use function \add_action;
 use function \wp_enqueue_script;
 use function \wp_enqueue_style;
 use Illuminate\Support\Collection;
-use TinyPixel\Copernicus\Copernicus as Application;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Block Asset
@@ -85,7 +85,7 @@ class BlockAsset
     /**
      * Constructor.
      *
-     * @param TinyPixel\Copernicus\Copernicus $app
+     * @param Illuminate\Contracts\Foundation\Application $app
      */
     public function __construct(Application $app)
     {
@@ -211,7 +211,7 @@ class BlockAsset
          * Bail if block is set to load conditionally and is
          * not utilized on page.
          */
-        if ($this->assetShouldBeEnqueued()) {
+        if (! $this->assetShouldBeEnqueued()) {
             return;
         }
 

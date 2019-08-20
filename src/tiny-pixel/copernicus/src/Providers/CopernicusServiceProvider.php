@@ -2,9 +2,8 @@
 
 namespace TinyPixel\Copernicus\Providers;
 
-use Copernicus\App\Registry;
-
 use Illuminate\Support\Collection;
+use Copernicus\App\Blocks\Registry;
 use TinyPixel\Copernicus\Blocks\Block;
 use TinyPixel\Copernicus\Blocks\BlockAsset;
 use TinyPixel\Copernicus\Blocks\BlockManager;
@@ -19,11 +18,11 @@ use TinyPixel\Copernicus\ServiceProvider;
 class CopernicusServiceProvider extends ServiceProvider
 {
     /**
-     * Register the plugin with the application container.
+     * Register the block-specific classes from the Application container.
      *
      * @return void
      */
-    public function register()
+    public function register() : void
     {
         /**
          * Individual block.
@@ -69,9 +68,9 @@ class CopernicusServiceProvider extends ServiceProvider
     }
 
     /**
-     * Boot the plugin from the application container.
+     * Boot the block-specific classes from the application container.
      */
-    public function boot()
+    public function boot() : void
     {
         /**
          * Create the registry.
