@@ -1,12 +1,11 @@
 {
-  "name": "tinypixel/copernicus",
+  "name": "tinypixel/base",
   "type": "wordpress-plugin",
   "license": "MIT",
-  "description": "A WordPress editor extension framework",
+  "description": "A slim Acorn-powered framework for the plugin space.",
   "autoload": {
     "psr-4": {
-      "TinyPixel\\Copernicus\\": ["src/tiny-pixel/copernicus/src"],
-      "Copernicus\\App\\": ["app"]
+      "TinyPixel\\Base\\": "src"
     }
   },
   "require": {

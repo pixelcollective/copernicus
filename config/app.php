@@ -55,9 +55,8 @@ return [
     */
 
     'providers' => [
-        TinyPixel\Copernicus\View\ViewServiceProvider::class,
-        TinyPixel\Copernicus\Providers\PluginServiceProvider::class,
-        TinyPixel\Copernicus\Providers\CopernicusServiceProvider::class,
+        TinyPixel\Base\View\ViewServiceProvider::class,
+        TinyPixel\Base\Providers\BaseServiceProvider::class,
     ],
 
     /*
@@ -72,14 +71,14 @@ return [
     */
 
     'aliases' => [
-        'App' => Illuminate\Support\Facades\App::class,
+        'App'     => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
-        'Blade' => Illuminate\Support\Facades\Blade::class,
-        'Cache' => Illuminate\Support\Facades\Cache::class,
-        'Config' => Illuminate\Support\Facades\Config::class,
-        'Event' => Illuminate\Support\Facades\Event::class,
-        'File' => Illuminate\Support\Facades\File::class,
+        'Blade'   => Illuminate\Support\Facades\Blade::class,
+        'Cache'   => Illuminate\Support\Facades\Cache::class,
+        'Config'  => Illuminate\Support\Facades\Config::class,
+        'Event'   => Illuminate\Support\Facades\Event::class,
+        'File'    => Illuminate\Support\Facades\File::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
-        'View' => Illuminate\Support\Facades\View::class,
+        'View'    => Illuminate\Support\Facades\View::class,
     ],
 ];

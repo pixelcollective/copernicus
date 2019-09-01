@@ -13,7 +13,7 @@ return [
     */
 
     'paths' => [
-        plugin_dir_path(__DIR__) . 'blocks/views',
+        plugin_dir_path(__DIR__) . 'resources/assets/views',
     ],
 
     /*
