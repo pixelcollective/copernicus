@@ -1,5 +1,5 @@
 <?php
-namespace TinyPixel\Base\Blocks;
+namespace TinyPixel\Copernicus\Blocks;
 
 use \add_action;
 use \register_block_type;
@@ -9,27 +9,13 @@ use Illuminate\View\View;
 class Block
 {
     /**
-     * Namespace
-     *
-     * @var string
-     */
-    public $namespace = 'plugin';
-
-    /**
-     * Blade engine
-     *
-     * @var \Illuminate Blade??
-     */
-    public static $blade;
-
-    /**
      * Constructor
      *
      * @return void
      */
     public function __construct($app)
     {
-        self::$blade = $app['view'];
+        $this->app = $app;
 
         add_action('init', [$this, 'register']);
     }
@@ -44,12 +30,10 @@ class Block
      */
     public function renderCallback($attributes, $content) : View
     {
-        $data = [
-            'attributes' => $attributes,
-            'content'    => $content,
-        ];
-
-        return self::$blade->make($this->view, $this->with($data));
+        return $this->app['view']->make($this->view, $this->with(
+            Collection::make($attributes),
+            Collection::make($content)
+        ));
     }
 
     /**
@@ -59,8 +43,11 @@ class Block
      */
     public function register($data)
     {
-        register_block_type("{$this->namespace}/{$this->name}", [
-            'render_callback' => isset($this->view) ? [$this, 'renderCallback'] : null
+        $name = explode('/', $this->name);
+
+        register_block_type("{$name[0]}/{$name[1]}", [
+            'render_callback' => isset($this->view)
+                ? [$this, 'renderCallback'] : null,
         ]);
     }
 }
