@@ -1,13 +1,12 @@
-# Copernicus (Formerly known as Project Mutombo)
+# Copernicus Block Framework
 
-[![Documentation](https://img.shields.io/static/v1.svg?label=Documentation&message=In&nbsp;Progress&color=blueviolet)](https://copernicus.tinypixel.dev) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+Documentation will be released with `v1.0.0`.
 
-A WordPress Block editor extension framework.
+- `plugin` directory is an example implementation.
+- `src` directory is what's being hacked on.
 
-Use Blade and other Laravel features to build amazing things.
+**Features:**
 
-Documentation: [https://copernicus.tinypixel.dev](https://copernicus.tinypixel.dev).
-
-If you'd like to contribute, please do! Just kidding, I know I'm one of six people making blocks with javascript and probably the only person on Earth willing to write blade directives for the editor.
-
-2019+ Kelly Mears, Tiny Pixel Collective, LLC // MIT Licensed
+- Developer-focused block registration
+- Command-line scaffolding tools for blocks, components, plugins, etc.
+- Optionally (and awesomely) render Gutenblocks with the View Templating engine.
